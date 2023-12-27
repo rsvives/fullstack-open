@@ -21,7 +21,7 @@ const App = () => {
     <div>
       <Header course={course}/>
       <Content part1={part1} part2={part2} part3={part3} />
-      <Total number={part1.exercises + part2.exercises + part3.exercises3}/>
+      <Total number={part1.exercises + part2.exercises + part3.exercises}/>
     </div>
   )
 }
