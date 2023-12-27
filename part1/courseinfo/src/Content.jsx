@@ -1,17 +1,13 @@
+import Part from "./Part"
+
 const Content = (props)=>{
     console.log("Content props",props)
     return(
        <div> 
-        <p>
-            {props.part1} {props.exercises1}
-        </p>
-        <p>
-            {props.part2} {props.exercises2}
-        </p>
-        <p>
-            {props.part3} {props.exercises3}
-        </p>
-     </div>
+           <Part name={props.part1.name} exercises={props.part1.exercises}/>
+           <Part name={props.part2.name} exercises={props.part2.exercises}/>
+           <Part name={props.part3.name} exercises={props.part3.exercises}/>
+        </div>
     )
 }
 export default Content
