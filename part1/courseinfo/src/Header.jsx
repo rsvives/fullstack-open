@@ -1,5 +1,5 @@
 const Header = (props)=>{
-    console.log('header args:',props.course);
+    console.log('header props:',props);
     return(
         <h1>{props.course}</h1>
     )

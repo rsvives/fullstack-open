@@ -1,7 +1,7 @@
 import Part from "./Part"
 
 const Content = (props)=>{
-    console.log("Content props",props)
+    console.log("Content props:",props)
     return(
        <div> 
            <Part name={props.part1.name} exercises={props.part1.exercises}/>
