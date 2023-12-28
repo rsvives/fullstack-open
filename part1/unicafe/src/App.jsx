@@ -41,6 +41,7 @@ const App = () => {
       <button onClick={addNeutral}>neutral</button>
       <button onClick={addBad}>bad</button>
       <Statistics statistics={statistics}/>
+
     </div>
   )
 }

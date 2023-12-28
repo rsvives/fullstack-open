@@ -1,5 +1,14 @@
 const Statistics = ({statistics})=>{
     const {good,neutral,bad,all,score} = statistics
+
+    if(all===0){
+        return(
+            <div>
+                <h2>Statistics</h2>
+                <p>No feedback given...</p>
+            </div> 
+        )
+    }
     return(
         <div>
             <h2>Statistics</h2>
