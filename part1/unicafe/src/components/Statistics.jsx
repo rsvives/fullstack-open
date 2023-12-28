@@ -14,12 +14,18 @@ const Statistics = ({statistics})=>{
     return(
         <div>
             <h2>Statistics</h2>
-            <StatisticsLine text={'good'} value={good}/>
-            <StatisticsLine text={'neutral'} value={neutral}/>
-            <StatisticsLine text={'bad'} value={bad}/>
-            <StatisticsLine text={'all'} value={all}/>
-            <StatisticsLine text={'average'} value={score/all}/>
-            <StatisticsLine text={'positive'} value={good*100/all+'%'}/>
+            <table>
+                <tbody>
+                    <StatisticsLine text={'good'} value={good}/>
+                    <StatisticsLine text={'neutral'} value={neutral}/>
+                    <StatisticsLine text={'bad'} value={bad}/>
+                    <StatisticsLine text={'all'} value={all}/>
+                    <StatisticsLine text={'average'} value={score/all}/>
+                    <StatisticsLine text={'positive'} value={good*100/all+'%'}/>
+                </tbody>
+            </table>
+
+            
         </div>
     )
 }
