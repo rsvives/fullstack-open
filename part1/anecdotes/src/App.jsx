@@ -30,11 +30,8 @@ const App = () => {
     setScore(copy)
   }
 
-  console.log(score);
+  // console.log(score);
 
-  
-
-  // console.log(score)
 if(Math.max(...score)===0){
   return(
     <div>
@@ -53,7 +50,7 @@ if(Math.max(...score)===0){
       <p>has {score[selected]} votes</p>
       <button onClick={vote}>vote</button>
       <button onClick={randomAnecdote}>Next anecdote</button>
-      
+
       <h2>Most voted:</h2>
       <p>{anecdotes[score.indexOf(Math.max(...score))]}</p>
       <p>has {Math.max(...score)} votes</p>
