@@ -15,16 +15,48 @@ const App = () => {
   const [selected, setSelected] = useState(0)
 
   const randomNumberBetween = (min,max)=>Math.floor(Math.random() * (max - min) + min)
-
   const randomAnecdote = ()=>{
     const random = randomNumberBetween(0,anecdotes.length)
     // console.log(random);
     setSelected(random)
   }
+
+  const [score,setScore] = useState(Array(anecdotes.length).fill(0))
+  
+  const vote = ()=>{
+    const copy = [...score]
+    copy[selected]+=1
+    // console.log(copy);
+    setScore(copy)
+  }
+
+  console.log(score);
+
+  
+
+  // console.log(score)
+if(Math.max(...score)===0){
+  return(
+    <div>
+      <p>{anecdotes[selected]}</p>
+      <p>has {score[selected]} votes</p>
+      <button onClick={vote}>vote</button>
+      <button onClick={randomAnecdote}>Next anecdote</button>
+      <h2>Most voted:</h2>
+      <p>No votes so far...</p>
+    </div>
+  )
+}
   return (
     <div>
       <p>{anecdotes[selected]}</p>
+      <p>has {score[selected]} votes</p>
+      <button onClick={vote}>vote</button>
       <button onClick={randomAnecdote}>Next anecdote</button>
+      
+      <h2>Most voted:</h2>
+      <p>{anecdotes[score.indexOf(Math.max(...score))]}</p>
+      <p>has {Math.max(...score)} votes</p>
     </div>
   )
 }
