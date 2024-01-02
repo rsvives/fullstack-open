@@ -7,9 +7,17 @@ const App = () => {
   const handleNewName = (event) => {
     setNewName(event.target.value)
   }
+
   const addNewPerson = (ev) => {
     ev.preventDefault()
-    console.log('addNewPerson')
+    // console.log('addNewPerson')
+    const duplicates = persons.find((person) => person.name === newName)
+
+    if (duplicates) {
+      alert(`${newName} is already added to phonebook`)
+      return
+    }
+
     const newPerson = {
       id: persons.length + 1,
       name: newName
