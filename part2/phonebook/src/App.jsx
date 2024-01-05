@@ -1,12 +1,23 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import NewContact from './components/NewContact'
 import SearchFilter from './components/SearchFilter'
 import ContactsList from './components/ContactsList'
+import axios from 'axios'
 
 const App = () => {
-  const [persons, setPersons] = useState([
-    { id: 1, name: 'Arto Hellas', number: '040-123456' }
-  ])
+  const [persons, setPersons] = useState([])
+
+  const DB_URL = 'http://localhost:3001/persons'
+
+  const hook = () => {
+    axios.get(DB_URL).then((response) => {
+      console.log(response)
+      setPersons(response.data)
+    })
+  }
+
+  useEffect(hook, [])
+
   const [newName, setNewName] = useState('')
   const [newNumber, setNewNumber] = useState('')
   const [filterName, setFilterName] = useState('')
