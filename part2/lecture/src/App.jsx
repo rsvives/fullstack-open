@@ -7,14 +7,15 @@ const App = (props) => {
   const [newNote, setNewNote] = useState('')
   const [showAll, setShowAll] = useState(true)
 
-  useEffect(() => {
+  const hook = () => {
     axios.get('http://localhost:3001/notes').then((response) => {
-      console.log(response)
       setNotes(response.data)
     })
-  }, [])
+  }
 
-  console.log('render', notes.length, 'notes')
+  useEffect(hook, [])
+
+  // console.log('render', notes.length, 'notes')
 
   const handleNoteChange = (event) => {
     // console.log(event.target.value)
