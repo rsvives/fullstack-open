@@ -73,6 +73,24 @@ const App = () => {
           person.name.toLowerCase().includes(filterName.toLowerCase())
         )
 
+  const handleRemove = (id) => {
+    console.log('remove', id)
+    const person = persons.find((p) => p.id === id)
+    const result = window.confirm(
+      `Are you sure that you want to remove ${person.name} from the phonebook?`
+    )
+    if (result) {
+      personService
+        .remove(id)
+        .then(() => {
+          setPersons(persons.filter((p) => p.id !== id))
+        })
+        .catch((error) => {
+          console.error(error)
+        })
+    }
+  }
+
   return (
     <div>
       <h1>Phonebook</h1>
@@ -88,7 +106,7 @@ const App = () => {
         handleNameFilter={handleNameFilter}
       />
 
-      <ContactsList persons={filteredPersons} />
+      <ContactsList persons={filteredPersons} handleRemove={handleRemove} />
     </div>
   )
 }
