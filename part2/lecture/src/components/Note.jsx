@@ -1,6 +1,13 @@
-const Note = ({ content }) => {
+const Note = ({ content, toggleImportance, important }) => {
   return (
-        <li>{content}</li>
+    <li>
+      {content} <label> | Important:</label>
+      <input
+        type="checkbox"
+        checked={important}
+        onClick={toggleImportance}
+      />{' '}
+    </li>
   )
 }
 export default Note
