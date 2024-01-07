@@ -5,7 +5,7 @@ const Note = ({ content, toggleImportance, important }) => {
       <input
         type="checkbox"
         checked={important}
-        onClick={toggleImportance}
+        onChange={toggleImportance}
       />{' '}
     </li>
   )

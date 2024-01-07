@@ -17,8 +17,6 @@ const App = (props) => {
 
   useEffect(hook, [])
 
-  // console.log('render', notes.length, 'notes')
-
   const handleNoteChange = (event) => {
     // console.log(event.target.value)
     setNewNote(event.target.value)
@@ -32,13 +30,13 @@ const App = (props) => {
       important: false,
       id: notes.length + 1
     }
-
     axios.post(DB_URL, note).then((res) => {
       console.log(res)
       setNotes(notes.concat(res.data))
       setNewNote('')
     })
   }
+
   const notesToShow = showAll ? notes : notes.filter((n) => n.important)
 
   const toggleDisplayAll = () => {
@@ -46,17 +44,23 @@ const App = (props) => {
     setShowAll(!showAll)
   }
 
-  const toggleImportanceOf = (el) => {
-    console.log(el)
-    const copyOfNotes = notes.map(({ id, important, ...args }) => {
-      return {
-        id,
-        ...args,
-        important: id === el.id ? !important : important
-      }
+  const toggleImportanceOf = ({ id }) => {
+    // console.log(el)
+    // const copyOfNotes = notes.map(({ id, important, ...args }) => {
+    //   return {
+    //     id,
+    //     ...args,
+    //     important: id === el.id ? !important : important
+    //   }
+    // })
+    // // console.log(copyOfNotes)
+    // setNotes(copyOfNotes)
+    const note = notes.find((n) => n.id === id)
+    const changedNote = { ...note, important: !note.important }
+    axios.put(`${DB_URL}/${id}`, changedNote).then((res) => {
+      console.log('note changed', res)
+      setNotes(notes.map((n) => (n.id !== id ? n : res.data)))
     })
-    // console.log(copyOfNotes)
-    setNotes(copyOfNotes)
   }
 
   return (
