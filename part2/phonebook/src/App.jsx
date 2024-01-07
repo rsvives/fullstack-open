@@ -51,9 +51,17 @@ const App = () => {
       name: newName,
       number: newNumber
     }
-    setPersons(persons.concat(newPerson))
-    setNewName('')
-    setNewNumber('')
+    axios
+      .post(DB_URL, newPerson)
+      .then((response) => {
+        console.log('person added', response)
+        setPersons(persons.concat(newPerson))
+        setNewName('')
+        setNewNumber('')
+      })
+      .catch((error) => {
+        console.log(error.response.data)
+      })
   }
 
   const handleNameFilter = (ev) => {
