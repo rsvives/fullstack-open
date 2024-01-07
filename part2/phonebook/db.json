@@ -29,6 +29,11 @@
       "id": 6,
       "name": "asdfasdfa",
       "number": "1234123412"
+    },
+    {
+      "id": 7,
+      "name": "asdfasdfasdfº",
+      "number": "123412341234123412341234123"
     }
   ]
 }

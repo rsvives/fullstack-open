@@ -2,17 +2,15 @@ import { useEffect, useState } from 'react'
 import NewContact from './components/NewContact'
 import SearchFilter from './components/SearchFilter'
 import ContactsList from './components/ContactsList'
-import axios from 'axios'
+import personService from './services/person'
 
 const App = () => {
   const [persons, setPersons] = useState([])
 
-  const DB_URL = 'http://localhost:3001/persons'
-
   const hook = () => {
-    axios.get(DB_URL).then((response) => {
-      console.log(response)
-      setPersons(response.data)
+    personService.getAll().then((initialPersons) => {
+      console.log('get persons', initialPersons)
+      setPersons(initialPersons)
     })
   }
 
@@ -51,11 +49,11 @@ const App = () => {
       name: newName,
       number: newNumber
     }
-    axios
-      .post(DB_URL, newPerson)
-      .then((response) => {
-        console.log('person added', response)
-        setPersons(persons.concat(newPerson))
+    personService
+      .create(newPerson)
+      .then((returnedPerson) => {
+        console.log('person added', returnedPerson)
+        setPersons(persons.concat(returnedPerson))
         setNewName('')
         setNewNumber('')
       })
