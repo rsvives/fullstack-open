@@ -8,7 +8,7 @@ function App() {
   const [filteredCountries, setFilteredCountries] = useState([])
   const [searchfield, setSearchfield] = useState('')
   const [selectedCountry, setSelectedCountry] = useState(null)
-  const [weatherData, setWeatherData] = useState({})
+  const [weatherData, setWeatherData] = useState(null)
 
   const getAllCountriesHook = () => {
     countryService
@@ -29,11 +29,11 @@ function App() {
 
   const filterCountries = () => {
     if (searchfield) {
-      const filteredCountries = initialCountries.filter((c) =>
+      const newCountries = initialCountries.filter((c) =>
         c.name.common.toLowerCase().includes(searchfield.toLowerCase())
       )
       // console.log('filtered', searchfield, filteredCountries)
-      setFilteredCountries(filteredCountries)
+      setFilteredCountries(newCountries)
     }
   }
 
@@ -53,10 +53,13 @@ function App() {
   const getWeatherData = () => {
     if (selectedCountry) {
       // console.log('weather::::', selectedCountry)
-      countryService.getWeatherFrom(selectedCountry).then((data) => {
-        console.log(data)
-        setWeatherData(data)
-      })
+      countryService
+        .getWeatherFrom(selectedCountry)
+        .then((data) => {
+          console.log(data)
+          setWeatherData(data)
+        })
+        .catch((er) => console.log(er))
     }
   }
 

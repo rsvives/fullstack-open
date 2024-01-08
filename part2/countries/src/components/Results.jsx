@@ -11,7 +11,7 @@ const Results = ({
     console.log('results component', countries)
     if (countries.length === 0) return <p>No results... :(</p>
     if (countries.length >= 10) return <p>too many countries match...</p>
-    if (countries.length === 1 || selectedCountry)
+    if (selectedCountry && weatherData !== null)
       return (
         <CountryDetails country={selectedCountry} weatherData={weatherData} />
       )
