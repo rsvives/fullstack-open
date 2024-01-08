@@ -1,3 +1,5 @@
+import './ContactsList.css'
+
 const Contact = ({ name, number, handleRemove }) => {
   return (
     <li>

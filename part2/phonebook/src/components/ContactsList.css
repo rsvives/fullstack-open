@@ -1,0 +1,26 @@
+ul {
+    list-style: none;
+    padding: 0;
+    max-width: 600px;
+}
+
+li {
+    display: flex;
+    justify-content: space-between;
+    padding: 12px 6px;
+    min-height: 48px;
+    border-bottom: 1px solid #d7d7d7;
+}
+
+li button {
+    display: none;
+}
+
+li:hover {
+    background-color: #e6e6e6;
+}
+
+li:hover button {
+    display: block;
+    cursor: pointer;
+}
