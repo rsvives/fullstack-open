@@ -8,6 +8,7 @@ function App() {
   const [filteredCountries, setFilteredCountries] = useState([])
   const [searchfield, setSearchfield] = useState('')
   const [selectedCountry, setSelectedCountry] = useState(null)
+  const [weatherData, setWeatherData] = useState({})
 
   const getAllCountriesHook = () => {
     countryService
@@ -49,13 +50,19 @@ function App() {
     }
   }
 
+  const getWeatherData = () => {
+    if (selectedCountry) {
+      // console.log('weather::::', selectedCountry)
+      countryService.getWeatherFrom(selectedCountry).then((data) => {
+        console.log(data)
+        setWeatherData(data)
+      })
+    }
+  }
+
   useEffect(filterCountries, [searchfield])
   useEffect(selectCountry, [filteredCountries])
-
-  // const makeSelectedCountry = (country) => {
-  //   console.log(country)
-  //   setSelectedCountry(country)
-  // }
+  useEffect(getWeatherData, [selectedCountry])
   return (
     <>
       <h1>Countries</h1>
@@ -72,6 +79,7 @@ function App() {
         countries={filteredCountries}
         searchfield={searchfield}
         selectCountry={selectCountry}
+        weatherData={weatherData}
       />
     </>
   )

@@ -1,12 +1,12 @@
-const CountryDetails = ({ country }) => {
+const CountryDetails = ({ country, weatherData }) => {
   if (!country) return
 
   const { name, capital, area, flag, flags, languages } = country
   return (
     <>
       <h2>
-        {name.common}
         {flag}
+        {name.common}
       </h2>
       <p>Capital: {capital}</p>
       <p>Area: {area}</p>
@@ -17,6 +17,26 @@ const CountryDetails = ({ country }) => {
         ))}
       </ul>
       <img src={flags.png} width={300} />
+      <h3>Weather data in {country.capital}</h3>
+      <div style={{ display: 'flex', gap: 12, alignItems: 'center' }}>
+        <img
+          src={
+            'https://openweathermap.org/img/wn/' +
+            weatherData.weather[0].icon +
+            '@2x.png'
+          }
+          alt=""
+        />
+        <div>
+          <p>
+            <b>Temperature: </b>
+            {(weatherData.main.temp - 273).toFixed(1)}ºC
+          </p>
+          <p>
+            <b>Wind:</b> {weatherData.wind.speed} m/s
+          </p>
+        </div>
+      </div>
     </>
   )
 }
