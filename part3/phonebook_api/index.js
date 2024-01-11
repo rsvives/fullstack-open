@@ -27,8 +27,21 @@ const persons = [
   },
 ];
 
+// all persons
 app.get("/api/persons", (req, res) => {
   res.status(200).json(persons);
+});
+
+// person by id
+app.get("/api/persons/:id", (req, res) => {
+  const id = +req.params.id;
+  const person = persons.find((p) => p.id === id);
+  //   console.log(person);
+  if (person) {
+    res.status(200).json(person);
+  } else {
+    res.status(404).json("person does not exist");
+  }
 });
 
 app.get("/info", (req, res) => {
