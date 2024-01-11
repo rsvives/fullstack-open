@@ -4,7 +4,7 @@ const app = express();
 app.use(express.json());
 
 //persons
-const persons = [
+let persons = [
   {
     id: 1,
     name: "Arto Hellas",
@@ -32,7 +32,7 @@ app.get("/api/persons", (req, res) => {
   res.status(200).json(persons);
 });
 
-// person by id
+// find person by id
 app.get("/api/persons/:id", (req, res) => {
   const id = +req.params.id;
   const person = persons.find((p) => p.id === id);
@@ -44,6 +44,21 @@ app.get("/api/persons/:id", (req, res) => {
   }
 });
 
+// delete person
+app.delete("/api/persons/:id", (req, res) => {
+  const id = +req.params.id;
+  const person = persons.find((p) => p.id === id);
+  //   console.log(person);
+  if (person) {
+    persons = persons.filter((p) => p.id !== id);
+    // console.log(persons);
+    res.status(200).json({ message: "person deleted", person });
+  } else {
+    res.status(404).json("person does not exist");
+  }
+});
+
+// info
 app.get("/info", (req, res) => {
   res.send(
     `<p>Phonebook has info for ${persons.length} people</p>
