@@ -5,7 +5,7 @@ const app = express();
 app.use(express.json());
 
 morgan.token("body", function getBody(req) {
-  console.log("req", req.method);
+  // console.log("req", req.method);
   return JSON.stringify(req.body);
 });
 
