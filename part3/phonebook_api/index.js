@@ -8,6 +8,7 @@ morgan.token("body", function getBody(req) {
   // console.log("req", req.method);
   return JSON.stringify(req.body);
 });
+app.use(morgan("tiny"));
 
 app.use(
   morgan(
