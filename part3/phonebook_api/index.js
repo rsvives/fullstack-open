@@ -3,6 +3,12 @@ const express = require("express");
 const app = express();
 app.use(express.json());
 
+const MAX_ID = Math.pow(2, 53);
+
+const generateId = (max) => {
+  return Math.floor(Math.random() * max);
+};
+
 //persons
 let persons = [
   {
@@ -29,6 +35,7 @@ let persons = [
 
 // all persons
 app.get("/api/persons", (req, res) => {
+  console.log(MAX_ID);
   res.status(200).json(persons);
 });
 
@@ -55,6 +62,26 @@ app.delete("/api/persons/:id", (req, res) => {
     res.status(200).json({ message: "person deleted", person });
   } else {
     res.status(404).json("person does not exist");
+  }
+});
+
+// new person
+app.post("/api/persons", (req, res) => {
+  if (!req.body.name || !req.body.number) {
+    return res.status(400).json({
+      error: "content missing",
+    });
+  } else {
+    const duplicated = persons.find((p) => p.name === req.body.name);
+    // console.log(duplicated);
+    if (!duplicated) {
+      const person = { id: generateId(MAX_ID), ...req.body };
+      //   console.log(person);
+      persons = persons.concat(person);
+      res.status(201).json({ message: "new person added", person });
+    } else {
+      res.status(409).json({ error: "name must be unique" });
+    }
   }
 });
 
