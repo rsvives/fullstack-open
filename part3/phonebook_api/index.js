@@ -4,7 +4,21 @@ const morgan = require("morgan");
 const app = express();
 app.use(express.json());
 
-app.use(morgan("tiny"));
+morgan.token("body", function getBody(req) {
+  console.log("req", req.method);
+  return JSON.stringify(req.body);
+});
+
+app.use(
+  morgan(
+    ":method :url :status :res[content-length] - :response-time ms :body",
+    {
+      skip(req, res) {
+        return req.method !== "POST";
+      },
+    }
+  )
+);
 
 const MAX_ID = Math.pow(2, 53);
 
@@ -38,7 +52,7 @@ let persons = [
 
 // all persons
 app.get("/api/persons", (req, res) => {
-  console.log(MAX_ID);
+  // console.log(MAX_ID);
   res.status(200).json(persons);
 });
 
