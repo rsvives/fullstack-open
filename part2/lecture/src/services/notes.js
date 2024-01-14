@@ -1,7 +1,9 @@
 import axios from 'axios'
+
 const baseUrl = process.env.BASE_URL
 
 const getAll = () => {
+  console.log('fetching', baseUrl)
   return axios.get(baseUrl).then((response) => response.data)
 }
 
