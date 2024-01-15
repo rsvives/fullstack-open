@@ -1,6 +1,5 @@
 import axios from 'axios'
-
-const baseUrl = process.env.BASE_URL
+const baseUrl = import.meta.env.VITE_REACT_APP_BASE_URL
 
 const getAll = () => {
   console.log('fetching', baseUrl)
