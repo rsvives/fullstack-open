@@ -25,11 +25,8 @@ app.use(
   )
 );
 
-const MAX_ID = Math.pow(2, 53);
 
-const generateId = (max) => {
-  return Math.floor(Math.random() * max);
-};
+
 
 
 // index
@@ -40,15 +37,15 @@ app.get("/", (req, res) => {
 });
 
 // all persons
-app.get("/api/persons", (req, res) => {
+app.get("/api/persons", (req, res, next) => {
   Person.find({})
   .then(persons=>{
     res.status(200).json(persons);
-  }).catch(err=>res.status(400).json(err))
+  }).catch(error=>next(error))
 });
 
 // find person by id
-app.get("/api/persons/:id", (req, res) => {
+app.get("/api/persons/:id", (req, res, next) => {
   const id = req.params.id;
   Person.findOne({_id:id})
   .then(person=>{
@@ -57,34 +54,29 @@ app.get("/api/persons/:id", (req, res) => {
     } else {
       res.status(404).end();
     }
-  }).catch((err)=>{
-    console.error(err);
-    res.status(400).json({message:"malformed id",error:err})
-  })
+  }).catch((error)=>next(error))
 });
 
 // delete person
-app.delete("/api/persons/:id", (req, res) => {
+app.delete("/api/persons/:id", (req, res, next) => {
   const id = req.params.id;
 
       Person.findByIdAndDelete(id)
       .then((person)=>{  
         if(person){
-          res.status(200).json({ message: "person deleted", person })
+          res.status(204).end()
         }else{
-          res.status(404).end()
+          throw new Error('deleting error: person not found')
         }
-      }).catch((err)=>{
-        res.status(500).json("Error deleting person", err)
+      }).catch((error)=>{
+        next(error)
       })
 });
 
 // new person
-app.post("/api/persons", (req, res) => {
+app.post("/api/persons", (req, res,next) => {
   if (!req.body.name || !req.body.number) {
-    return res.status(400).json({
-      error: "content missing",
-    });
+    throw new Error("content missing")
   } else {
     Person.find( {name:req.body.name})
     .then((result)=>{
@@ -92,22 +84,32 @@ app.post("/api/persons", (req, res) => {
       if (!result.length) {
         const person = new Person({...req.body})      
         person.save().then((savedPerson)=>{
+          // throw new Error()
           res.status(201).json({ message: `${savedPerson.name} was added`, person:savedPerson })
         })
-        .catch(err=>res.status(400).json({message:'error saving new person',err}))
+        .catch(error=>{
+          const e = new Error('error saving new person',{cause: error})
+          next(e)
+        })
       } else {
-        res.status(409).json({ error: "name must be unique" });
+        throw new Error("name must be unique")
       }
     })
-    .catch(err=>res.status(400).json({message:'error looking for duplicates', err}))
+    .catch((error)=>next(error))
 
   }
 });
 
 //update
-app.put("/api/persons", (req, res) => {
+app.put("/api/persons/:id", (req, res,next) => {
   console.log("put method");
-  return res.json({ method: "put" });
+  const id = req.params.id;
+  Person.findByIdAndUpdate(id,{...req.body},{new:true})
+  .then(updatedPerson => {
+      res.json(updatedPerson)
+    })
+    .catch(error => next(error))
+
 });
 
 // info
@@ -115,8 +117,39 @@ app.get("/info", (req, res) => {
   res.send(
     `<p>Phonebook has info for ${persons.length} people</p>
     <p>${Date()}</p>`
-  );
-});
+  )
+})
+
+const unknownEndpoint = (request, response) => {
+  response.status(404).send({ error: 'unknown endpoint' })
+}
+
+const errorHandler = (error, request, response, next) => {
+  console.error(error.message)
+
+  if(error.name==='CastError') return response.status(400).send({ error: 'malformatted id' })
+  
+  switch(error.message){
+    case 'content missing':
+      return response.status(400).send({error: error.message} )
+      break
+    case 'name must be unique':
+      return response.status(409).send({error: error.message} )
+      break
+    case 'error saving new person':
+      return response.status(400).send({error: error.message} )
+      break
+    case 'deleting error: person not found':
+      return response.status(404).send({error:error.message})
+      break
+    default:
+    next(error)
+  } 
+}
+
+
+app.use(unknownEndpoint)
+app.use(errorHandler)
 
 const PORT = process.env.PORT || 3001
 app.listen(PORT, () => {
