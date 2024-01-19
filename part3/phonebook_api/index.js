@@ -1,8 +1,10 @@
 const express = require("express");
 const morgan = require("morgan");
+const cors = require("cors");
 
 const app = express();
 app.use(express.json());
+app.use(cors());
 
 morgan.token("body", function getBody(req) {
   // console.log("req", req.method);
@@ -96,11 +98,16 @@ app.post("/api/persons", (req, res) => {
       const person = { id: generateId(MAX_ID), ...req.body };
       //   console.log(person);
       persons = persons.concat(person);
-      res.status(201).json({ message: "new person added", person });
+      res.status(201).json({ message: `${person.name} was added`, person });
     } else {
       res.status(409).json({ error: "name must be unique" });
     }
   }
+});
+
+app.put("/api/persons", (req, res) => {
+  console.log("put method");
+  return res.json({ method: "put" });
 });
 
 // info

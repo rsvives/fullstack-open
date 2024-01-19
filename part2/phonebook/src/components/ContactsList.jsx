@@ -1,8 +1,8 @@
 import './ContactsList.css'
 
-const Contact = ({ name, number, handleRemove }) => {
+const Contact = ({ id, name, number, handleRemove }) => {
   return (
-    <li>
+    <li key={id}>
       {name}: {number} <button onClick={handleRemove}>❌ remove</button>
     </li>
   )

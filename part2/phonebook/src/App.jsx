@@ -92,14 +92,15 @@ const App = () => {
         .create(newPerson)
         .then((returnedPerson) => {
           console.log('person added', returnedPerson)
-          setPersons(persons.concat(returnedPerson))
-          setNewName('')
-          setNewNumber('')
+          setPersons([...persons].concat(returnedPerson.person))
+
           const notification = {
-            message: `✅ ${returnedPerson.name} added `,
+            message: returnedPerson.message,
             status: 'success'
           }
           setNotification(notification)
+          setNewName('')
+          setNewNumber('')
           setTimeout(
             () => setNotification({ message: null, status: null }),
             3000
