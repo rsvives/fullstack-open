@@ -23,18 +23,18 @@ const unknownEndpoint = (request, response) => {
 let notes = [
   {
     id: 1,
-    content: "HTML is easy",
-    important: true,
+  content: "HTML is easy",
+  important: true,
   },
   {
     id: 2,
-    content: "Browser can execute only JavaScript",
-    important: false,
+  content: "Browser can execute only JavaScript",
+  important: false,
   },
   {
     id: 3,
-    content: "GET and POST are the most important methods of HTTP protocol",
-    important: true,
+  content: "GET and POST are the most important methods of HTTP protocol",
+  important: true,
   },
 ];
 
@@ -62,6 +62,17 @@ app.get("/api/notes/:id", (req, res) => {
   } else {
     res.status(404).end();
   }
+});
+
+// update note
+app.put("/api/notes/:id", (req, res) => {
+  const id = Number(req.params.id);
+  const newNote = req.body;
+  console.log(id, newNote);
+  const noteToBeUpdated = notes.find((el) => el.id === id);
+  noteToBeUpdated.content = newNote.content;
+  noteToBeUpdated.important = newNote.important;
+  res.json(noteToBeUpdated);
 });
 
 // delete note
