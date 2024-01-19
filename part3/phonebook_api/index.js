@@ -80,19 +80,25 @@ app.post("/api/persons", (req, res) => {
       error: "content missing",
     });
   } else {
-    const duplicated = persons.find((p) => p.name === req.body.name);
-    // console.log(duplicated);
-    if (!duplicated) {
-      const person = { id: generateId(MAX_ID), ...req.body };
-      //   console.log(person);
-      persons = persons.concat(person);
-      res.status(201).json({ message: `${person.name} was added`, person });
-    } else {
-      res.status(409).json({ error: "name must be unique" });
-    }
+    Person.find( {name:req.body.name})
+    .then((result)=>{
+      console.log(result);
+      if (!result.length) {
+        const person = new Person({...req.body})      
+        person.save().then((savedPerson)=>{
+          res.status(201).json({ message: `${savedPerson.name} was added`, person:savedPerson })
+        })
+        .catch(err=>res.status(400).json({message:'error saving new person',err}))
+      } else {
+        res.status(409).json({ error: "name must be unique" });
+      }
+    })
+    .catch(err=>res.status(400).json({message:'error looking for duplicates', err}))
+
   }
 });
 
+//update
 app.put("/api/persons", (req, res) => {
   console.log("put method");
   return res.json({ method: "put" });
