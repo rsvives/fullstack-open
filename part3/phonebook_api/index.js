@@ -54,6 +54,13 @@ let persons = [
   },
 ];
 
+// info
+app.get("/", (req, res) => {
+  res.send(
+    `<h1>Phonebook app</h1>`
+  );
+});
+
 // all persons
 app.get("/api/persons", (req, res) => {
   // console.log(MAX_ID);
