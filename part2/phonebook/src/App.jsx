@@ -45,7 +45,7 @@ const App = () => {
     const duplicates = persons.find((person) => person.name === newName)
 
     const newPerson = {
-      id: persons.length + 1,
+      // id: persons.length + 1,
       name: newName,
       number: newNumber
     }
@@ -96,7 +96,8 @@ const App = () => {
 
           const notification = {
             message: returnedPerson.message,
-            status: 'success'
+            status: 'success', 
+            returnedPerson
           }
           setNotification(notification)
           setNewName('')
