@@ -1,6 +1,7 @@
 const express = require("express");
 const morgan = require("morgan");
 const cors = require("cors");
+const Person = require('./models/person')
 
 const app = express();
 app.use(express.json());
@@ -30,41 +31,20 @@ const generateId = (max) => {
   return Math.floor(Math.random() * max);
 };
 
-//persons
-let persons = [
-  {
-    id: 1,
-    name: "Arto Hellas",
-    number: "040-123456",
-  },
-  {
-    id: 2,
-    name: "Ada Lovelace",
-    number: "39-44-5323523",
-  },
-  {
-    id: 3,
-    name: "Dan Abramov",
-    number: "12-43-234345",
-  },
-  {
-    id: 4,
-    name: "Mary Poppendieck",
-    number: "39-23-6423122",
-  },
-];
 
 // index
-// app.get("/", (req, res) => {
-//   res.send(
-//     `<h1>Phonebook app</h1>`
-//   );
-// });
+app.get("/", (req, res) => {
+  res.send(
+    `<h1>Phonebook app</h1>`
+  );
+});
 
 // all persons
 app.get("/api/persons", (req, res) => {
-  // console.log(MAX_ID);
-  res.status(200).json(persons);
+  Person.find({})
+  .then(persons=>{
+    res.status(200).json(persons);
+  }).catch(err=>res.status(400).json(err))
 });
 
 // find person by id
