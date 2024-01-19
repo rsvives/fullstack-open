@@ -49,28 +49,34 @@ app.get("/api/persons", (req, res) => {
 
 // find person by id
 app.get("/api/persons/:id", (req, res) => {
-  const id = +req.params.id;
-  const person = persons.find((p) => p.id === id);
-  //   console.log(person);
-  if (person) {
-    res.status(200).json(person);
-  } else {
-    res.status(404).json("person does not exist");
-  }
+  const id = req.params.id;
+  Person.findOne({_id:id})
+  .then(person=>{
+    if (person) {
+      res.status(200).json(person);
+    } else {
+      res.status(404).end();
+    }
+  }).catch((err)=>{
+    console.error(err);
+    res.status(400).json({message:"malformed id",error:err})
+  })
 });
 
 // delete person
 app.delete("/api/persons/:id", (req, res) => {
-  const id = +req.params.id;
-  const person = persons.find((p) => p.id === id);
-  //   console.log(person);
-  if (person) {
-    persons = persons.filter((p) => p.id !== id);
-    // console.log(persons);
-    res.status(200).json({ message: "person deleted", person });
-  } else {
-    res.status(404).json("person does not exist");
-  }
+  const id = req.params.id;
+
+      Person.findByIdAndDelete(id)
+      .then((person)=>{  
+        if(person){
+          res.status(200).json({ message: "person deleted", person })
+        }else{
+          res.status(404).end()
+        }
+      }).catch((err)=>{
+        res.status(500).json("Error deleting person", err)
+      })
 });
 
 // new person
@@ -82,7 +88,7 @@ app.post("/api/persons", (req, res) => {
   } else {
     Person.find( {name:req.body.name})
     .then((result)=>{
-      console.log(result);
+      // console.log(result)
       if (!result.length) {
         const person = new Person({...req.body})      
         person.save().then((savedPerson)=>{
