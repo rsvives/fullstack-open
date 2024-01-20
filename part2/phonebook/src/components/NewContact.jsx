@@ -18,6 +18,7 @@ const NewContact = ({
             name="name"
             value={newName}
             onChange={handleNameChange}
+            placeholder="Asturio"
           />
         </div>
         <div>
@@ -29,7 +30,8 @@ const NewContact = ({
             name="number"
             value={newNumber}
             onChange={handleNumberChange}
-            pattern="[0-9]{9}"
+            // pattern="[0-9]{9}"
+            placeholder="123-12345"
           />
         </div>
         <button type="submit" onClick={addNewPerson}>

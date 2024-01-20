@@ -75,9 +75,9 @@ app.delete("/api/persons/:id", (req, res, next) => {
 
 // new person
 app.post("/api/persons", (req, res,next) => {
-  if (!req.body.name || !req.body.number) {
-    throw new Error("content missing")
-  } else {
+  // if (!req.body.name || !req.body.number) {
+    // throw new Error("content missing")
+  // } else {
     Person.find( {name:req.body.name})
     .then((result)=>{
       // console.log(result)
@@ -94,7 +94,7 @@ app.post("/api/persons", (req, res,next) => {
     })
     .catch((error)=>next(error))
 
-  }
+  // }
 });
 
 //update

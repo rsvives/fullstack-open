@@ -36,10 +36,10 @@ const App = () => {
     ev.preventDefault()
 
     // check if name or number is empty
-    if (newName === '' || newNumber === '') {
-      alert('Please fill in the fields')
-      return
-    }
+    // if (newName === '' || newNumber === '') {
+    //   alert('Please fill in the fields')
+    //   return
+    // }
 
     // check if name already exists
     const duplicates = persons.find((person) => person.name === newName)
