@@ -1,0 +1,27 @@
+{
+  "name": "bloglistsapp",
+  "version": "1.0.0",
+  "description": "Allows users to save information about interesting blogs they have stumbled across on the internet. For each listed blog we will save the author, title, URL, and amount of upvotes from users of the application.",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "nodemon index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.3.2",
+    "express": "^4.18.2",
+    "mongoose": "^7.6.5"
+  },
+  "devDependencies": {
+    "eslint": "^8.56.0",
+    "eslint-config-standard": "^17.1.0",
+    "eslint-plugin-import": "^2.29.1",
+    "eslint-plugin-n": "^16.6.2",
+    "eslint-plugin-promise": "^6.1.1",
+    "nodemon": "^3.0.3"
+  }
+}
