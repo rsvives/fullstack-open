@@ -29,3 +29,22 @@ Source code:
 - API: [./part3/phonebook_api](./part3/phonebook_api/)
 
 
+### Course resources:
+
+#### Deploy
+- Fly.io [🔗](https://fly.io/)
+- Render [🔗](https://render.com/)
+- ...
+
+#### Loggers
+- Morgan [🔗](https://github.com/expressjs/morgan)
+- Graylog [🔗](https://graylog.org/)
+- Papertrail [🔗](https://www.papertrail.com/)
+
+#### Error handling
+- Sentry [🔗](https://sentry.io/)
+
+#### Utils
+-  [Regexr](https://regexr.com/): Regex explained
+
+
