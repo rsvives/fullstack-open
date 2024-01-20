@@ -78,7 +78,7 @@ const App = () => {
         .catch((error) => {
           // console.error(error)
           const notification = {
-            message: `❌ ${newPerson.name} was already updated. Details: ${error.message} `,
+            message: `❌  ${error.response.data.error} `,
             status: 'error'
           }
           setNotification(notification)
@@ -109,7 +109,7 @@ const App = () => {
         })
         .catch((error) => {
           const notification = {
-            message: `❌ ${newPerson.name} already exists. Details: ${error.message} `,
+            message: `❌ ${error.response.data.error} `,
             status: 'error'
           }
           setNotification(notification)

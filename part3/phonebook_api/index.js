@@ -87,10 +87,7 @@ app.post("/api/persons", (req, res,next) => {
           // throw new Error()
           res.status(201).json({ message: `${savedPerson.name} was added`, person:savedPerson })
         })
-        .catch(error=>{
-          const e = new Error('error saving new person',{cause: error})
-          next(e)
-        })
+        .catch(error=>next(error))
       } else {
         throw new Error("name must be unique")
       }
@@ -104,7 +101,7 @@ app.post("/api/persons", (req, res,next) => {
 app.put("/api/persons/:id", (req, res,next) => {
   console.log("put method");
   const id = req.params.id;
-  Person.findByIdAndUpdate(id,{...req.body},{new:true})
+  Person.findByIdAndUpdate(id,{...req.body},{new:true, runValidators:true,context:'query'})
   .then(updatedPerson => {
       res.json(updatedPerson)
     })
@@ -127,21 +124,23 @@ const unknownEndpoint = (request, response) => {
 const errorHandler = (error, request, response, next) => {
   console.error(error.message)
 
-  if(error.name==='CastError') return response.status(400).send({ error: 'malformatted id' })
+  switch(error.name) {
+    case 'CastError':
+      return response.status(400).send({ error: 'malformatted id' })
+    case 'ValidationError':
+      return response.status(400).send({error:error.message})
+  }
+
   
   switch(error.message){
     case 'content missing':
       return response.status(400).send({error: error.message} )
-      break
     case 'name must be unique':
       return response.status(409).send({error: error.message} )
-      break
     case 'error saving new person':
       return response.status(400).send({error: error.message} )
-      break
     case 'deleting error: person not found':
       return response.status(404).send({error:error.message})
-      break
     default:
     next(error)
   } 
