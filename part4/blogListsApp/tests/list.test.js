@@ -60,9 +60,9 @@ describe('total likes', () => {
 })
 
 describe('favorite blog', () => {
-  test('of empty list, returns undefined', () => {
+  test('of empty list, returns null', () => {
     const result = listHelper.favoriteBlog([])
-    expect(result).toEqual(undefined)
+    expect(result).toEqual(null)
   })
   test('of list of blogs, returns the one with more likes', () => {
     const result = listHelper.favoriteBlog(listWithBlogs)
@@ -72,5 +72,26 @@ describe('favorite blog', () => {
       likes: 12
     }
     expect(result).toEqual(expectedResult)
+  })
+})
+
+describe('author with most blogs', () => {
+  test('of list returns the author with most blogs', () => {
+    const result = listHelper.mostBlogs(listWithBlogs)
+    expect(result).toEqual({
+      author: 'Edsger W. Dijkstra',
+      blogs: 2
+    })
+  })
+  test('of list with one author returns the sam author in the right format', () => {
+    const result = listHelper.mostBlogs(listWithOneBlog)
+    expect(result).toEqual({
+      author: 'Edsger W. Dijkstra',
+      blogs: 1
+    })
+  })
+  test('of an empty list returns null', () => {
+    const result = listHelper.mostBlogs([])
+    expect(result).toEqual(null)
   })
 })
