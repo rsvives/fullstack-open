@@ -40,9 +40,27 @@ const mostBlogs = (list) => {
   return authorWithMostBlogs
 }
 
+const mostLikes = (list) => {
+  if (list.length === 0) return null
+  const groupedList = _.groupBy((list), 'author')
+
+  const mapped = Object.keys(groupedList).map(key => {
+    return {
+      author: key,
+      likes: groupedList[key].reduce((acum, current) => acum + current.likes, 0)
+    }
+  })
+
+  const authorWithMostLikes = mapped.reduce((max, current) => current.likes > max.likes ? current : max)
+
+  // console.log(authorWithMostLikes)
+  return authorWithMostLikes
+}
+
 module.exports = {
   dummy,
   totalLikes,
   favoriteBlog,
-  mostBlogs
+  mostBlogs,
+  mostLikes
 }
