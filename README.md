@@ -45,6 +45,7 @@ Source code:
 - Sentry [🔗](https://sentry.io/)
 
 #### Utils
--  [Regexr](https://regexr.com/): Regex explained
+- [Regexr](https://regexr.com/): Regex explained
+- [Lodash](https://lodash.com/): Extra functionality for Javascript (a bit old)
 
 
