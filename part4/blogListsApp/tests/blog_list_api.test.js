@@ -79,18 +79,39 @@ describe('DELETE a blog', () => {
   test('succeeds with 204 code if deleted OK', async () => {
     const blogs = await helper.dbBlogs()
     const lastBlog = blogs.pop()
-    console.log('IDDDDD', lastBlog.id)
     await api.delete(`/api/blogs/${lastBlog.id}`)
       .expect(204)
   })
-  test('fails with 404 if wrong id', async () => {
+  test('fails with 400 if wrong id', async () => {
     await api.delete('/api/blogs/123').expect(400)
   })
 })
 
 describe('UPDATE a blog', () => {
-  test.todo('a valid blog can be posted')
-  test.todo('likes property defaults to 0 if undefined')
+  test('succeeds with 200 code if OK', async () => {
+    const blogs = await helper.dbBlogs()
+    const lastBlog = blogs.pop()
+    lastBlog.title = 'new title'
+
+    await api.put(`/api/blogs/${lastBlog.id}`)
+      .send(lastBlog)
+      .expect(200)
+
+    const updatedBlogs = await helper.dbBlogs()
+    const updatedLastBlog = updatedBlogs.pop()
+    expect(updatedLastBlog.title).toBe(lastBlog.title)
+  })
+  test('fails with 400 if wrong id', async () => {
+    await api.put('/api/blogs/123').expect(400)
+  })
+  test('only update the correct fields', async () => {
+    const blogs = await helper.dbBlogs()
+    const lastBlog = blogs.pop()
+    lastBlog.wrongField = 'this is very wrong'
+
+    const updatedBlog = await api.put(`/api/blogs/${lastBlog.id}`).send(lastBlog)
+    expect(updatedBlog.wrongField).toBeUndefined()
+  })
 })
 
 afterAll(async () => {
