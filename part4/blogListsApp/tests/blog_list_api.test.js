@@ -76,8 +76,16 @@ describe('POST new blog', () => {
 })
 
 describe('DELETE a blog', () => {
-  test.todo('succeeds with 204 code if deleted OK')
-  test.todo('fails with 404 if wrong id')
+  test('succeeds with 204 code if deleted OK', async () => {
+    const blogs = await helper.dbBlogs()
+    const lastBlog = blogs.pop()
+    console.log('IDDDDD', lastBlog.id)
+    await api.delete(`/api/blogs/${lastBlog.id}`)
+      .expect(204)
+  })
+  test('fails with 404 if wrong id', async () => {
+    await api.delete('/api/blogs/123').expect(400)
+  })
 })
 
 describe('UPDATE a blog', () => {
