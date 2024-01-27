@@ -57,8 +57,22 @@ describe('POST new blog', () => {
 
     expect(lastBlog.likes).toBe(0)
   })
-  test.todo('title must be defined')
-  test.todo('url must be defined')
+  test('title must be defined', async () => {
+    const newBlog = helper.newBlog
+    delete newBlog.title
+
+    await api.post('/api/blogs')
+      .send(newBlog)
+      .expect(400)
+  })
+  test('url must be defined', async () => {
+    const newBlog = helper.newBlog
+    delete newBlog.url
+
+    await api.post('/api/blogs')
+      .send(newBlog)
+      .expect(400)
+  })
 })
 
 describe('DELETE a blog', () => {
