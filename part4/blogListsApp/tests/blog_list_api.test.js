@@ -45,7 +45,18 @@ describe('POST new blog', () => {
     expect(titles).toContain(helper.newBlog.title)
   })
 
-  test.todo('likes property defaults to 0 if undefined')
+  test('likes property defaults to 0 if undefined', async () => {
+    const newBlog = helper.newBlog
+    delete newBlog.likes
+
+    await api.post('/api/blogs')
+      .send(newBlog)
+
+    const savedBlogs = await helper.dbBlogs()
+    const lastBlog = savedBlogs.pop()
+
+    expect(lastBlog.likes).toBe(0)
+  })
   test.todo('title must be defined')
   test.todo('url must be defined')
 })
