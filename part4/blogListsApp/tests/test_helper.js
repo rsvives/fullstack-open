@@ -50,6 +50,12 @@ const initialBlogs = [
     __v: 0
   }
 ]
+const newBlog = {
+  title: 'Some Blog',
+  author: 'Somebody',
+  url: 'https://something.org',
+  likes: 12
+}
 
 const dbBlogs = async () => {
   const blogs = await Blog.find({})
@@ -57,6 +63,7 @@ const dbBlogs = async () => {
 }
 
 module.exports = {
+  newBlog,
   initialBlogs,
   dbBlogs
 }

@@ -15,7 +15,7 @@ beforeEach(async () => {
   }
 })
 
-describe('getting blogs from db', () => {
+describe('GET all blogs from db', () => {
   test('notes are returned in JSON', async () => {
     await api
       .get('/api/blogs')
@@ -25,9 +25,39 @@ describe('getting blogs from db', () => {
   test('notes have id property', async () => {
     const response = await api.get('/api/blogs')
     const ids = response.body.map(r => r.id)
-    // expect(ids[0]).toBeDefined() //just checking one
+    // expect(ids[0]).toBeDefined() // just checking one
     expect(ids.every((id) => id !== undefined && id !== null)).toBeTruthy() // checking if all are defined
   })
+})
+
+describe('POST new blog', () => {
+  test('a valid blog can be posted', async () => {
+    await api
+      .post('/api/blogs')
+      .send(helper.newBlog)
+      .expect(201)
+      .expect('Content-Type', /application\/json/)
+
+    const savedBlogs = await helper.dbBlogs()
+    expect(savedBlogs).toHaveLength(helper.initialBlogs.length + 1)
+
+    const titles = savedBlogs.map(blog => blog.title)
+    expect(titles).toContain(helper.newBlog.title)
+  })
+
+  test.todo('likes property defaults to 0 if undefined')
+  test.todo('title must be defined')
+  test.todo('url must be defined')
+})
+
+describe('DELETE a blog', () => {
+  test.todo('succeeds with 204 code if deleted OK')
+  test.todo('fails with 404 if wrong id')
+})
+
+describe('UPDATE a blog', () => {
+  test.todo('a valid blog can be posted')
+  test.todo('likes property defaults to 0 if undefined')
 })
 
 afterAll(async () => {
