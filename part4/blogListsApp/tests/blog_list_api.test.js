@@ -9,7 +9,7 @@ const api = supertest(app)
 beforeEach(async () => {
   await Blog.deleteMany({})
 
-  for (const blog of helper.blogs) {
+  for (const blog of helper.initialBlogs) {
     const newBlog = new Blog(blog)
     await newBlog.save()
   }
@@ -21,6 +21,12 @@ describe('getting blogs from db', () => {
       .get('/api/blogs')
       .expect(200)
       .expect('Content-Type', /application\/json/)
+  })
+  test('notes have id property', async () => {
+    const response = await api.get('/api/blogs')
+    const ids = response.body.map(r => r.id)
+    // expect(ids[0]).toBeDefined() //just checking one
+    expect(ids.every((id) => id !== undefined && id !== null)).toBeTruthy() // checking if all are defined
   })
 })
 
