@@ -1,4 +1,5 @@
 const _ = require('lodash')
+const Blog = require('../models/blog')
 const dummy = (blogs) => {
   return blogs ? 1 : 0
 }
@@ -8,9 +9,10 @@ const totalLikes = (list) => {
 }
 
 const favoriteBlog = (list) => {
-  const mappedList = list.map((el) => {
-    const { title, author, likes } = el
-    return { title, author, likes }
+  const mappedList = list.map((blog) => {
+    const { author, likes, title } = blog
+    // return new Blog({ author, likes, title })
+    return { author, likes, title }
   })
 
   const fav = mappedList.length === 0
