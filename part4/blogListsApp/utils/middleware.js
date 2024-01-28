@@ -1,9 +1,11 @@
 const logger = require('./logger')
 
 const requestLogger = (request, response, next) => {
+  const { password, ...bodyWithNoPwd } = request.body
+
   logger.info('Method:', request.method)
   logger.info('Path:  ', request.path)
-  logger.info('Body:  ', request.body)
+  logger.info('Body:  ', bodyWithNoPwd)
   logger.info('---')
   next()
 }
