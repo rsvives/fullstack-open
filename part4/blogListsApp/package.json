@@ -7,7 +7,8 @@
     "start": "cross-env NODE_ENV=production node index.js",
     "dev": "cross-env NODE_ENV=development nodemon index.js",
     "test": "cross-env NODE_ENV=test jest --verbose",
-    "test:watch": "cross-env NODE_ENV=test jest --watch"
+    "test:users": "cross-env NODE_ENV=test jest user_api --verbose",
+    "test:blogs": "cross-env NODE_ENV=test jest blog_list_api --verbose"
   },
   "author": "",
   "license": "ISC",
@@ -18,6 +19,7 @@
     "dotenv": "^16.3.2",
     "express": "^4.18.2",
     "express-async-errors": "^3.1.1",
+    "jsonwebtoken": "^9.0.2",
     "mongoose": "^7.6.5"
   },
   "devDependencies": {

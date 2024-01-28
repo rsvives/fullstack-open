@@ -1,3 +1,6 @@
+const config = require('../utils/config')
+const bcrypt = require('bcrypt')
+
 const Blog = require('../models/blog')
 const User = require('../models/user')
 
@@ -75,10 +78,33 @@ const dbUsers = async () => {
   return users.map(user => user.toJSON())
 }
 
+const initializeDB = async () => {
+  await clearDB()
+
+  const user = await new User(firstUser)
+  user.passwordHash = await bcrypt.hash(firstUser.password, config.SALT_ROUNDS)
+
+  const savedUser = await user.save()
+
+  for (const blog of initialBlogs) {
+    const newBlog = new Blog(blog)
+    newBlog.user = savedUser.id
+    const savedBlog = await newBlog.save()
+    savedUser.blogList = savedUser.blogList.concat(savedBlog.id)
+  }
+  await savedUser.save()
+  console.log(savedUser)
+}
+const clearDB = async () => {
+  await User.collection.drop()
+  await Blog.collection.drop()
+}
+
 module.exports = {
   newBlog,
   initialBlogs,
   dbBlogs,
   firstUser,
-  dbUsers
+  dbUsers,
+  initializeDB
 }

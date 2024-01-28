@@ -1,19 +1,15 @@
 const mongoose = require('mongoose')
-const bcrypt = require('bcrypt')
-const config = require('../utils/config')
+
 const app = require('../app')
 const supertest = require('supertest')
-const User = require('../models/user')
+// const User = require('../models/user')
+// const Blog = require('../models/blog')
 const helper = require('./test_helper')
 
 const api = supertest(app)
 
 beforeEach(async () => {
-  await User.deleteMany({})
-
-  const newUser = new User(helper.firstUser)
-  newUser.passwordHash = await bcrypt.hash(helper.firstUser.password, config.SALT_ROUNDS)
-  await newUser.save()
+  return await helper.initializeDB()
 })
 
 describe('GET all users from db', () => {
@@ -29,6 +25,7 @@ describe('GET all users from db', () => {
     // expect(ids[0]).toBeDefined() // just checking one
     expect(ids.every((id) => id !== undefined && id !== null)).toBeTruthy() // checking if all are defined
   })
+  test.todo('users have blogs')
 })
 describe('POST new users', () => {
   test('a valid user can be posted', async () => {
