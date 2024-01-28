@@ -1,4 +1,5 @@
 const User = require('../models/user')
+const config = require('../utils/config')
 const bcrypt = require('bcrypt')
 const usersRouter = require('express').Router()
 
@@ -8,8 +9,10 @@ usersRouter.get('/', async (req, res) => {
 })
 usersRouter.post('/', async (req, res) => {
   const { name, username, password } = req.body
-  const SALT_ROUNDS = 10
-  const passwordHash = await bcrypt.hash(password, SALT_ROUNDS)
+
+  if (!username || !password || password.length < 3) res.status(400).json({ error: 'username and password are required' }).end()
+
+  const passwordHash = await bcrypt.hash(password, config.SALT_ROUNDS)
 
   const newUser = new User({ name, username, passwordHash })
   const savedUser = await newUser.save()
