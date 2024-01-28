@@ -1,0 +1,24 @@
+TODO:
+    PART 4: 
+        ✔ Ex 4.17 - Blogs having users @30m @started(24-01-27 21:00) @done(24-01-27 21:35) @lasted(35m23s)
+        ✔ Ex 4.17 - Tests @15m @started(24-01-28 09:07) @done(24-01-28 09:32) @lasted(25m51s)
+        ✔ Ex 4.17 - Users having blogs @30m @started(24-01-27 21:35) @done(24-01-27 21:42) @lasted(7m19s)
+        ✘ Ex 4.17 - Tests @15m @started(24-01-28 10:19) @cancelled(24-01-28 10:58) @wasted(39m47s)
+        
+        ✔ Ex 4.18 - Token auth @30m @started(24-01-28 11:45) @done(24-01-28 11:53) @lasted(8m22s)
+        
+        ☐ Ex 4.19 - POST new blogs only with token @30m
+        
+        ☐ Ex 4.20 - Refactor extracting token with middleware @20m
+        
+        ☐ Ex 4.21 - DELETE blogs only with token and owner user @30m
+        ☐ Ex 4.21 - Tests @30m
+        
+        ☐ Ex 4.22 - user extraction middleware @30m
+        
+        ☐ Ex 4.23 - Tests for adding new user @20m
+        ☐ Ex 4.23 - Tests adding new blog (401:unauthorized) @20m
+
+
+
+    PART 5:
