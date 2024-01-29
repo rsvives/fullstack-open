@@ -1,6 +1,7 @@
 const blogsRouter = require('express').Router()
 const Blog = require('../models/blog')
 const User = require('../models/user')
+const { userExtractor } = require('../utils/middleware')
 
 // get all
 blogsRouter.get('/', async (req, res) => {
@@ -15,29 +16,32 @@ blogsRouter.get('/:id', async (req, res) => {
 })
 
 // new
-blogsRouter.post('/', async (request, response) => {
+blogsRouter.post('/', userExtractor, async (request, response, next) => {
   const blog = new Blog(request.body)
   if (!blog.title || !blog.url) { return response.status(400).end() }
 
-  const users = await User.find({})
-  const firstUser = new User(users[0])
-  // console.log(firstUser.id)
-
-  blog.user = firstUser.id
-
+  const decodedToken = request.decodedToken
+  const user = await User.findById(decodedToken.id)
+  blog.user = user.id
   const savedBlog = await blog.save()
 
-  firstUser.blogList = firstUser.blogList.concat(savedBlog.id)
-  await firstUser.save()
+  user.blogList = user.blogList.concat(savedBlog.id)
+  await user.save()
 
-  response.status(201).json(blog)
+  response.status(201).json(savedBlog)
 })
 
 // delete
-blogsRouter.delete('/:id', async (request, response) => {
+blogsRouter.delete('/:id', userExtractor, async (request, response) => {
   const id = request.params.id
-  await Blog.findByIdAndDelete(id)
-  response.status(204).end()
+
+  const user = await User.findById(request.decodedToken.id).populate('blogList')
+  if (user.blogList.map(b => b.id).includes(id)) {
+    await Blog.findByIdAndDelete(id)
+    response.status(204).end()
+  } else {
+    return response.status(403).json({ error: 'Action forbidden: user is not the owner of the resource' })
+  }
 })
 
 // update

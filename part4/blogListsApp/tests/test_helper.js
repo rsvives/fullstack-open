@@ -1,5 +1,5 @@
-const config = require('../utils/config')
-const bcrypt = require('bcrypt')
+// const config = require('../utils/config')
+// const bcrypt = require('bcrypt')
 
 const Blog = require('../models/blog')
 const User = require('../models/user')
@@ -11,7 +11,8 @@ const initialBlogs = [
     author: 'Michael Chan',
     url: 'https://reactpatterns.com/',
     likes: 7,
-    __v: 0
+    __v: 0,
+    user: '65b6f1340815d10bac68f88f'
   },
   {
     _id: '5a422aa71b54a676234d17f8',
@@ -19,7 +20,8 @@ const initialBlogs = [
     author: 'Edsger W. Dijkstra',
     url: 'http://www.u.arizona.edu/~rubinson/copyright_violations/Go_To_Considered_Harmful.html',
     likes: 5,
-    __v: 0
+    __v: 0,
+    user: '65b6f1340815d10bac68f88f'
   },
   {
     _id: '5a422b3a1b54a676234d17f9',
@@ -27,7 +29,8 @@ const initialBlogs = [
     author: 'Edsger W. Dijkstra',
     url: 'http://www.cs.utexas.edu/~EWD/transcriptions/EWD08xx/EWD808.html',
     likes: 12,
-    __v: 0
+    __v: 0,
+    user: '65b6f1340815d10bac68f88f'
   },
   {
     _id: '5a422b891b54a676234d17fa',
@@ -35,7 +38,8 @@ const initialBlogs = [
     author: 'Robert C. Martin',
     url: 'http://blog.cleancoder.com/uncle-bob/2017/05/05/TestDefinitions.htmll',
     likes: 10,
-    __v: 0
+    __v: 0,
+    user: '65b6f1340815d10bac68f88f'
   },
   {
     _id: '5a422ba71b54a676234d17fb',
@@ -43,7 +47,8 @@ const initialBlogs = [
     author: 'Robert C. Martin',
     url: 'http://blog.cleancoder.com/uncle-bob/2017/03/03/TDD-Harms-Architecture.html',
     likes: 0,
-    __v: 0
+    __v: 0,
+    user: '65b6f1340815d10bac68f88f'
   },
   {
     _id: '5a422bc61b54a676234d17fc',
@@ -51,7 +56,8 @@ const initialBlogs = [
     author: 'Robert C. Martin',
     url: 'http://blog.cleancoder.com/uncle-bob/2016/05/01/TypeWars.html',
     likes: 2,
-    __v: 0
+    __v: 0,
+    user: '65b6f1360815d10bac68f8a1'
   }
 ]
 const newBlog = {
@@ -73,6 +79,35 @@ const firstUser =
     password: 'pass123'
   }
 
+const initialUsers = [
+  {
+    _id: '65b6f1340815d10bac68f88f',
+    username: 'user1',
+    name: 'Mr. User',
+    blogList: [
+      '5a422a851b54a676234d17f7',
+      '5a422aa71b54a676234d17f8',
+      '5a422b3a1b54a676234d17f9',
+      '5a422b891b54a676234d17fa',
+      '5a422ba71b54a676234d17fb'
+
+    ],
+    passwordHash: '$2b$10$UV51IG2biTFtJBTlOWGXhO6OCaT38zt3.7q39e1ccN9qB3xf5UwUC'
+
+  },
+  {
+    _id: '65b6f1360815d10bac68f8a1',
+    username: 'second',
+    name: 'sec',
+    passwordHash: '$2b$10$DPDpiKz5kqUyxziVuHWgUOZktRvsuS6AkHbzqwSofqHoEecm4yhuG',
+    blogList: [
+      '5a422bc61b54a676234d17fc'
+    ]
+
+  }
+
+]
+
 const dbUsers = async () => {
   const users = await User.find({})
   return users.map(user => user.toJSON())
@@ -81,19 +116,22 @@ const dbUsers = async () => {
 const initializeDB = async () => {
   await clearDB()
 
-  const user = await new User(firstUser)
-  user.passwordHash = await bcrypt.hash(firstUser.password, config.SALT_ROUNDS)
+  // const user = await new User(firstUser)
+  // user.passwordHash = await bcrypt.hash(firstUser.password, config.SALT_ROUNDS)
 
-  const savedUser = await user.save()
+  // const savedUser = await user.save()
 
   for (const blog of initialBlogs) {
     const newBlog = new Blog(blog)
-    newBlog.user = savedUser.id
-    const savedBlog = await newBlog.save()
-    savedUser.blogList = savedUser.blogList.concat(savedBlog.id)
+    await newBlog.save()
   }
-  await savedUser.save()
-  console.log(savedUser)
+  for (const user of initialUsers) {
+    const newUser = new User(user)
+    await newUser.save()
+  }
+
+  // await savedUser.save()
+  // console.log(savedUser)
 }
 const clearDB = async () => {
   await User.collection.drop()
@@ -103,6 +141,7 @@ const clearDB = async () => {
 module.exports = {
   newBlog,
   initialBlogs,
+  initialUsers,
   dbBlogs,
   firstUser,
   dbUsers,

@@ -2,14 +2,19 @@ const mongoose = require('mongoose')
 
 const supertest = require('supertest')
 const app = require('../app')
-// const Blog = require('../models/blog')
-// const User = require('../models/user')
+const jwt = require('jsonwebtoken')
 const helper = require('./test_helper')
 
 const api = supertest(app)
+let token = null
+let firstUser = null
 
 beforeEach(async () => {
-  return await helper.initializeDB()
+  await helper.initializeDB()
+
+  const users = await helper.dbUsers()
+  firstUser = users[0]
+  token = jwt.sign(firstUser, process.env.SECRET)
 })
 
 describe('GET all blogs from db', () => {
@@ -46,6 +51,7 @@ describe('POST new blog', () => {
     await api
       .post('/api/blogs')
       .send(newBlog)
+      .set('Authorization', `Bearer ${token}`)
       .expect(201)
       .expect('Content-Type', /application\/json/)
 
@@ -55,6 +61,14 @@ describe('POST new blog', () => {
     const titles = savedBlogs.map(blog => blog.title)
     expect(titles).toContain(helper.newBlog.title)
   })
+  test('returns 401 if no token is provided', async () => {
+    const newBlog = helper.newBlog
+
+    await api
+      .post('/api/blogs')
+      .send(newBlog)
+      .expect(401)
+  })
 
   test('likes property defaults to 0 if undefined', async () => {
     const newBlog = helper.newBlog
@@ -62,6 +76,7 @@ describe('POST new blog', () => {
 
     await api.post('/api/blogs')
       .send(newBlog)
+      .set('Authorization', `Bearer ${token}`)
 
     const savedBlogs = await helper.dbBlogs()
     const lastBlog = savedBlogs.pop()
@@ -74,6 +89,7 @@ describe('POST new blog', () => {
 
     await api.post('/api/blogs')
       .send(newBlog)
+      .set('Authorization', `Bearer ${token}`)
       .expect(400)
   })
   test('url must be defined', async () => {
@@ -82,6 +98,7 @@ describe('POST new blog', () => {
 
     await api.post('/api/blogs')
       .send(newBlog)
+      .set('Authorization', `Bearer ${token}`)
       .expect(400)
   })
 })
@@ -89,12 +106,25 @@ describe('POST new blog', () => {
 describe('DELETE a blog', () => {
   test('succeeds with 204 code if deleted OK', async () => {
     const blogs = await helper.dbBlogs()
-    const lastBlog = blogs.pop()
-    await api.delete(`/api/blogs/${lastBlog.id}`)
+    const firstBlog = blogs[0] // should be from first user (same as token)
+
+    await api.delete(`/api/blogs/${firstBlog.id}`).set('Authorization', `Bearer ${token}`)
       .expect(204)
   })
-  test('fails with 400 if wrong id', async () => {
-    await api.delete('/api/blogs/123').expect(400)
+
+  test('fails with 401 if does not have a token', async () => {
+    const blogs = await helper.dbBlogs()
+    const lastBlog = blogs.pop()
+
+    await api.delete(`/api/blogs/${lastBlog.id}`).expect(401)
+  })
+  test('fails with 403 if wrong user', async () => {
+    // const secondUser = await new User({ username: 'second', name: 'sec', passwordHash: await bcrypt.hash('pass2', 10) }).save()
+    const blogs = await helper.dbBlogs()
+    const lastBlog = blogs.pop() // should be from second user
+
+    await api.delete(`/api/blogs/${lastBlog.id}`).set('Authorization', `Bearer ${token}`)
+      .expect(403)
   })
 })
 
