@@ -1,7 +1,9 @@
+import './App.css'
 import { useState, useEffect } from 'react'
 
 import LoginForm from './components/LoginForm'
 import BlogList from './components/BlogList'
+import NotificationToast from './components/NotificationToast'
 
 import loginService from './services/login'
 import blogService from './services/blogs'
@@ -12,6 +14,7 @@ const App = () => {
   const [password, setPassword] = useState('')
   const [user, setUser] = useState(null)
   const [newBlog, setNewBlog] = useState({ title: '', author: '', url: '' })
+  const [notification, setNotification] = useState({ message: '', status: '' })
 
   useEffect(() => {
     blogService.getAll().then(blogs =>
@@ -39,8 +42,12 @@ const App = () => {
       window.localStorage.setItem('loggedBloglistUser', JSON.stringify(response))
       setUsername('')
       setPassword('')
+      setNotification({ message: `👋 Welcome ${response.name}`, status: 'success' })
     } catch (error) {
       console.error('credentials error', error)
+      setNotification({ message: `❌ Wrong username or password. Details: ${error}`, status: 'error' })
+    } finally {
+      setTimeout(() => setNotification({ message: '', status: '' }), 5000)
     }
   }
 
@@ -63,8 +70,12 @@ const App = () => {
       const addedBlog = await blogService.createNew(newBlog)
       // console.log(addedBlog)
       setBlogs([...blogs, addedBlog])
+      setNotification({ message: '✅ New blog added', status: 'success' })
     } catch (error) {
       console.error('error creating new blog', error)
+      setNotification({ message: `Error creating new blog, error: ${error}`, status: 'error' })
+    } finally {
+      setTimeout(() => setNotification({ message: '', status: '' }), 5000)
     }
   }
 
@@ -85,11 +96,13 @@ const App = () => {
 
   return (
     <div>
-      <h1>Blog List App</h1>
+      {notification.message !== '' && <NotificationToast message={notification.message} status={notification.status}/>}
+      <h1>Blog List App {user && logoutButton() }</h1>
       {user === null ? loginForm() : blogList() }
-      {user && logoutButton() }
       <br />
-      {JSON.stringify(newBlog)}
+
+      <br />
+      {/* {JSON.stringify(newBlog)} */}
     </div>
   )
 }
