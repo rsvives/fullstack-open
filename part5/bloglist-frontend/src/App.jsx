@@ -11,6 +11,7 @@ const App = () => {
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
   const [user, setUser] = useState(null)
+  const [newBlog, setNewBlog] = useState({ title: '', author: '', url: '' })
 
   useEffect(() => {
     blogService.getAll().then(blogs =>
@@ -49,12 +50,29 @@ const App = () => {
   const handlePasswordChange = (event) => {
     setPassword(event.target.value)
   }
+  const handleNewBlogChange = (event) => {
+    const { name, value } = event.target
+    // console.log('handleNewBlogChange', name, value)
+    setNewBlog({ ...newBlog, [name]: value })
+  }
+  const createNewBlog = async (event) => {
+    event.preventDefault()
+    console.log('create new blog', newBlog)
+    blogService.setToken(user.token)
+    try {
+      const addedBlog = await blogService.createNew(newBlog)
+      // console.log(addedBlog)
+      setBlogs([...blogs, addedBlog])
+    } catch (error) {
+      console.error('error creating new blog', error)
+    }
+  }
 
   const loginForm = () => (
     <LoginForm submitAction={handleLogin} user={{ username, handleUsernameChange }} pwd={{ password, handlePasswordChange }} />
   )
   const blogList = () => (
-    <BlogList blogs={blogs}/>
+    <BlogList blogs={blogs} newBlogProp={{ newBlog, handleNewBlogChange }} onCreateNew={createNewBlog}/>
   )
 
   const logoutButton = () => {
@@ -70,6 +88,8 @@ const App = () => {
       <h1>Blog List App</h1>
       {user === null ? loginForm() : blogList() }
       {user && logoutButton() }
+      <br />
+      {JSON.stringify(newBlog)}
     </div>
   )
 }
