@@ -1,13 +1,23 @@
 import axios from 'axios'
 const baseUrl = import.meta.env.VITE_REACT_APP_BASE_URL
 
+let token = null
+
+const setToken = (newToken) => {
+  token = `bearer ${newToken}`
+}
+
 const getAll = () => {
   console.log('fetching', baseUrl)
   return axios.get(baseUrl).then((response) => response.data)
 }
 
-const create = (newObject) => {
-  return axios.post(baseUrl, newObject).then((response) => response.data)
+const create = async (newObject) => {
+  const headers = {
+    Authorization: token
+  }
+  const response = await axios.post(baseUrl, newObject, { headers })
+  return response.data
 }
 
 const update = (id, newObject) => {
@@ -23,5 +33,6 @@ const update = (id, newObject) => {
 export default {
   getAll,
   create,
-  update
+  update,
+  setToken
 }
