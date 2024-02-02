@@ -10,10 +10,8 @@ import blogService from './services/blogs'
 
 const App = () => {
   const [blogs, setBlogs] = useState([])
-  const [username, setUsername] = useState('')
-  const [password, setPassword] = useState('')
   const [user, setUser] = useState(null)
-  const [newBlog, setNewBlog] = useState({ title: '', author: '', url: '' })
+  // const [newBlog, setNewBlog] = useState({ title: '', author: '', url: '' })
   const [notification, setNotification] = useState({ message: '', status: '' })
 
   useEffect(() => {
@@ -31,17 +29,15 @@ const App = () => {
   }
   useEffect(getUserFromLocalStorage, [])
 
-  const handleLogin = async (event) => {
-    event.preventDefault()
+  const handleLogin = async (username, password) => {
     console.log('login', username, password)
     try {
-      const response = await loginService.login({ username, password })
+      const response = await loginService.login(username, password)
 
       console.log(response)
       setUser(response)
       window.localStorage.setItem('loggedBloglistUser', JSON.stringify(response))
-      setUsername('')
-      setPassword('')
+
       setNotification({ message: `👋 Welcome ${response.name}`, status: 'success' })
     } catch (error) {
       console.error('credentials error', error)
@@ -51,24 +47,13 @@ const App = () => {
     }
   }
 
-  const handleUsernameChange = (event) => {
-    setUsername(event.target.value)
-  }
-  const handlePasswordChange = (event) => {
-    setPassword(event.target.value)
-  }
-  const handleNewBlogChange = (event) => {
-    const { name, value } = event.target
-    // console.log('handleNewBlogChange', name, value)
-    setNewBlog({ ...newBlog, [name]: value })
-  }
-  const createNewBlog = async (event) => {
-    event.preventDefault()
-    console.log('create new blog', newBlog)
+  const createNewBlog = async (blogObject) => {
     blogService.setToken(user.token)
     try {
-      const addedBlog = await blogService.createNew(newBlog)
-      // console.log(addedBlog)
+      // blogObject.user = user
+      const addedBlog = await blogService.createNew(blogObject)
+      addedBlog.user = { username: user.username, name: user.name }
+      console.log('added blog', addedBlog)
       setBlogs([...blogs, addedBlog])
       setNotification({ message: '✅ New blog added', status: 'success' })
     } catch (error) {
@@ -80,10 +65,10 @@ const App = () => {
   }
 
   const loginForm = () => (
-    <LoginForm submitAction={handleLogin} user={{ username, handleUsernameChange }} pwd={{ password, handlePasswordChange }} />
+    <LoginForm submitAction={handleLogin} />
   )
   const blogList = () => (
-    <BlogList blogs={blogs} newBlogProp={{ newBlog, handleNewBlogChange }} onCreateNew={createNewBlog}/>
+    <BlogList blogs={blogs} onCreateNew={createNewBlog}/>
   )
 
   const logoutButton = () => {
@@ -99,10 +84,7 @@ const App = () => {
       {notification.message !== '' && <NotificationToast message={notification.message} status={notification.status}/>}
       <h1>Blog List App {user && logoutButton() }</h1>
       {user === null ? loginForm() : blogList() }
-      <br />
 
-      <br />
-      {/* {JSON.stringify(newBlog)} */}
     </div>
   )
 }

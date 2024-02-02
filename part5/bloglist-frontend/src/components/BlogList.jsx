@@ -1,24 +1,22 @@
 import Blog from './Blog'
+import NewBlogForm from './NewBlogForm'
 
-const BlogList = ({ blogs, newBlogProp, onCreateNew }) => {
-  const { newBlog, handleNewBlogChange } = newBlogProp
+const BlogList = ({ blogs, onCreateNew }) => {
+  const blogList = {
+    maxWidth: 800,
+    margin: 'auto'
+  }
 
   return (
     <>
-    <h2> Create New</h2>
-      <form onSubmit={onCreateNew}>
-        <label htmlFor="blogTitle">Title:</label><br />
-        <input type="text" id='blogTitle' value={newBlog.title} name="title" onChange={handleNewBlogChange} required/><br />
-        <label htmlFor="blogAuthor">Author:</label><br />
-        <input type="text" id='blogAuthor' value={newBlog.author} name="author" onChange={handleNewBlogChange} required/><br />
-        <label htmlFor="blogUrl">Url:</label><br />
-        <input type="text" id='blogUrl' value={newBlog.url} name="url" onChange={handleNewBlogChange} required/><br /><br />
-        <button type="submit"> + New Blog</button>
-      </form>
+    <NewBlogForm createNewBlog={onCreateNew} />
+
+    <div className="blogList" style={blogList}>
     <h2>Blogs</h2>
-    {blogs.map(blog =>
+      {blogs.map(blog =>
         <Blog key={blog.id} blog={blog} />
-    )}
+      )}
+    </div>
   </>
   )
 }

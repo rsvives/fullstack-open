@@ -83,7 +83,7 @@ const initialUsers = [
   {
     _id: '65b6f1340815d10bac68f88f',
     username: 'user1',
-    name: 'Mr. User',
+    name: 'Mr. User One',
     blogList: [
       '5a422a851b54a676234d17f7',
       '5a422aa71b54a676234d17f8',
@@ -98,8 +98,8 @@ const initialUsers = [
   {
     _id: '65b6f1360815d10bac68f8a1',
     username: 'second',
-    name: 'sec',
-    passwordHash: '$2b$10$DPDpiKz5kqUyxziVuHWgUOZktRvsuS6AkHbzqwSofqHoEecm4yhuG',
+    name: 'Sencond User',
+    passwordHash: '$2b$10$UV51IG2biTFtJBTlOWGXhO6OCaT38zt3.7q39e1ccN9qB3xf5UwUC',
     blogList: [
       '5a422bc61b54a676234d17fc'
     ]

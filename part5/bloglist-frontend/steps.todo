@@ -1,0 +1,35 @@
+PART 5:
+    Part 5b- prop children and proptypes: @today
+        ☐ Reading material @est(1h)
+        ✔ 5.5 - Toggle new Blog form @est(45m) @started(24-02-01 15:15) @done(24-02-01 16:33) @lasted(1h18m37s)
+        ✔ 5.6 - Refactor newBlogForm in new component @est(30m) @started(24-02-01 16:33) @done(24-02-01 18:16) @lasted(1h43m44s)
+
+        ✔ 5.7 - Make blogs in blogList togglable: @done(24-02-01 18:17)
+            ✔ integrate with toggleComponent @est(20m) @done(24-02-01 18:16)
+            ✔ add CSS @est(10m) @done(24-02-01 18:17)
+
+        ✔ 5.8 - Showing user in new posts @est(30m) @done(24-02-01 19:05)
+        5.9 - Update number of likes:
+            ✔ backend @est(25m) @done(24-02-01 19:51)
+            ✔ frontend @est(25m) @high @done(24-02-01 20:21)
+
+        ☐ 5.10 - Display blogs: Sorting by number of likes @est(15m)
+        ☐ 5.11 - Deleting blogs @est(20m)
+        ☐ 5.12 - Define PropTypes @est(1h)
+
+    Part 5c - testing: @today
+        ☐ Reading material @est(1h30m)
+        ☐ 5.13 - Test: only title and author displayed by default @est(30m)
+        ☐ 5.14 - Test: URL and likes supper when clicked @est(30m)
+        ☐ 5.15 - Test: like button clicked twice, handled twice @est(30m)
+        ☐ 5.16 - Test: new blog form @est(30m)
+
+    Part 5d - E2E testing:
+        ☐ Reading material @est(1h30m)
+        ☐ 5.17 - configure cypress @est(15m)
+        ☐ 5.18 - login successfully and unsuccessfully attempts @est(30m)
+        ☐ 5.19 - logged in users can create blogs @est(30m)
+        ☐ 5.20 - users can like @est(20m)
+        ☐ 5.21 - owners can delete @est(30m)
+        ☐ 5.22 - only owners can see delete button @est(30m)
+
