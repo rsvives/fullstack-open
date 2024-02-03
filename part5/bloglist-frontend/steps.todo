@@ -9,11 +9,11 @@ PART 5:
             ✔ add CSS @est(10m) @done(24-02-01 18:17)
 
         ✔ 5.8 - Showing user in new posts @est(30m) @done(24-02-01 19:05)
-        5.9 - Update number of likes:
+        ✔ 5.9 - Update number of likes: @done(24-02-02 08:25)
             ✔ backend @est(25m) @done(24-02-01 19:51)
             ✔ frontend @est(25m) @high @done(24-02-01 20:21)
 
-        ☐ 5.10 - Display blogs: Sorting by number of likes @est(15m)
+        ✔ 5.10 - Display blogs: Sorting by number of likes @est(15m) @done(24-02-02 08:25)
         ☐ 5.11 - Deleting blogs @est(20m)
         ☐ 5.12 - Define PropTypes @est(1h)
 

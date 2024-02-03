@@ -10,8 +10,8 @@ import blogService from './services/blogs'
 
 const App = () => {
   const [blogs, setBlogs] = useState([])
+  const [sortedBlogs, setSortedBlogs] = useState([])
   const [user, setUser] = useState(null)
-  // const [newBlog, setNewBlog] = useState({ title: '', author: '', url: '' })
   const [notification, setNotification] = useState({ message: '', status: '' })
 
   useEffect(() => {
@@ -19,6 +19,13 @@ const App = () => {
       setBlogs(blogs)
     )
   }, [])
+  const sortBlogs = () => {
+    const sorted = [...blogs].sort((a, b) => b.likes - a.likes)
+    console.log('sorted', sorted)
+    setSortedBlogs(sorted)
+  }
+
+  useEffect(() => { sortBlogs() }, [blogs])
 
   const getUserFromLocalStorage = () => {
     const loggedUserJSON = window.localStorage.getItem('loggedBloglistUser')
@@ -64,11 +71,19 @@ const App = () => {
     }
   }
 
+  const updateBlog = async (blog) => {
+    // console.log('updating likes', blog)
+    blog.likes = blog.likes + 1
+    await blogService.updateBlog({ ...blog })
+    const newBlogs = blogs.map(b => b.id === blog.id ? b : b)
+    setBlogs(newBlogs)
+  }
+
   const loginForm = () => (
     <LoginForm submitAction={handleLogin} />
   )
   const blogList = () => (
-    <BlogList blogs={blogs} onCreateNew={createNewBlog}/>
+    <BlogList blogs={sortedBlogs} onCreateNew={createNewBlog} onUpdate={updateBlog}/>
   )
 
   const logoutButton = () => {
@@ -76,13 +91,15 @@ const App = () => {
       window.localStorage.removeItem('loggedBloglistUser')
       setUser(null)
     }
-    return <button onClick={handleLogout}>logout</button>
+    return (<button onClick={handleLogout}>logout</button>)
   }
 
   return (
     <div>
+      {/* {JSON.stringify()} */}
       {notification.message !== '' && <NotificationToast message={notification.message} status={notification.status}/>}
-      <h1>Blog List App {user && logoutButton() }</h1>
+      <h1>Blog List App <span>{user && user.name} {user && logoutButton() }</span></h1>
+
       {user === null ? loginForm() : blogList() }
 
     </div>

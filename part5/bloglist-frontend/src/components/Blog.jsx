@@ -1,10 +1,10 @@
 import { useState } from 'react'
-import blogService from '../services/blogs'
+// import blogService from '../services/blogs'
 
 // import Togglable from './Togglable'
-const Blog = ({ blog }) => {
+const Blog = ({ blog, onUpdate }) => {
   const [expanded, setExpanded] = useState(false)
-  const [likes, setLikes] = useState(blog.likes)
+  // const [likes, setLikes] = useState(blog.likes)
   const style = {
     display: 'flex',
     justifyContent: 'space-between',
@@ -32,8 +32,10 @@ const Blog = ({ blog }) => {
   )
 
   const increaseLikes = async () => {
-    const updatedBlog = await blogService.updateBlog({ ...blog, likes: likes + 1 })
-    setLikes(updatedBlog.likes)
+    // const updatedBlog = await blogService.updateBlog({ ...blog, likes: likes + 1 })
+    // blog.likes = updatedBlog.likes
+    // setLikes(updatedBlog.likes)
+    onUpdate(blog)
   }
 
   const compressedView = (buttonLabel = 'show') => (
@@ -48,7 +50,7 @@ const Blog = ({ blog }) => {
   const expandedView = () => (
     <>
    { compressedView('hide')}
-    <p >{likes} likes <button style={likeButton} onClick={increaseLikes}>like</button> </p>
+    <p >{blog.likes} likes <button style={likeButton} onClick={increaseLikes}>like</button> </p>
     <a href={blog.url} target='_blank' rel="noreferrer">{blog.url}</a>
     <p>{blog.user.name} | <i>@{blog.user.username}</i> </p>
     </>
