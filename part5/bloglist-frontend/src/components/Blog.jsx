@@ -1,7 +1,7 @@
 import { useState } from 'react'
 
 // import Togglable from './Togglable'
-const Blog = ({ blog, onUpdate, onDelete }) => {
+const Blog = ({ blog, onUpdate, onDelete, loggedUser }) => {
   const [expanded, setExpanded] = useState(false)
   // const [likes, setLikes] = useState(blog.likes)
   const style = {
@@ -53,7 +53,7 @@ const Blog = ({ blog, onUpdate, onDelete }) => {
     <p >{blog.likes} likes <button style={likeButton} onClick={increaseLikes}>like</button> </p>
     <a href={blog.url} target='_blank' rel="noreferrer">{blog.url}</a>
     <p>{blog.user.name} | <i>@{blog.user.username}</i> </p>
-    <button onClick={handleDelete}>delete</button>
+    {blog.user.username === loggedUser.username && <button onClick={handleDelete}>delete</button>}
     </>
   )
   return (

@@ -106,7 +106,7 @@ const App = () => {
     <LoginForm submitAction={handleLogin} />
   )
   const blogList = () => (
-    <BlogList blogs={sortedBlogs} onCreateNew={createNewBlog} onUpdate={updateBlog} onDelete={deleteBlog}/>
+    <BlogList blogs={sortedBlogs} onCreateNew={createNewBlog} onUpdate={updateBlog} onDelete={deleteBlog} loggedUser={user}/>
   )
 
   const logoutButton = () => {
