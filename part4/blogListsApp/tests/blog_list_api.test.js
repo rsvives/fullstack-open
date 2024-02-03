@@ -9,15 +9,16 @@ const api = supertest(app)
 let token = null
 let firstUser = null
 
-beforeEach(async () => {
+const initTests = () => (beforeAll(async () => {
   await helper.initializeDB()
 
   const users = await helper.dbUsers()
   firstUser = users[0]
   token = jwt.sign(firstUser, process.env.SECRET)
-})
+}))
 
 describe('GET all blogs from db', () => {
+  initTests()
   test('blogs are returned in JSON', async () => {
     await api
       .get('/api/blogs')
@@ -42,6 +43,7 @@ describe('GET all blogs from db', () => {
 })
 
 describe('POST new blog', () => {
+  initTests()
   test('a valid blog can be posted', async () => {
     const newBlog = helper.newBlog
     const users = await helper.dbUsers()
@@ -104,6 +106,8 @@ describe('POST new blog', () => {
 })
 
 describe('DELETE a blog', () => {
+  initTests()
+
   test('succeeds with 204 code if deleted OK', async () => {
     const blogs = await helper.dbBlogs()
     const firstBlog = blogs[0] // should be from first user (same as token)
@@ -129,6 +133,8 @@ describe('DELETE a blog', () => {
 })
 
 describe('UPDATE a blog', () => {
+  initTests()
+
   test('succeeds with 200 code if OK', async () => {
     const blogs = await helper.dbBlogs()
     const lastBlog = blogs.pop()

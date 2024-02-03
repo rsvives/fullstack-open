@@ -10,7 +10,7 @@ const NewBlogForm = ({ createNewBlog }) => {
     // console.log('handleNewBlogChange', name, value)
     setNewBlog({ ...newBlog, [name]: value })// 👈 this is fire
   }
-  const addNewBlog = async (event) => {
+  const addNewBlog = (event) => {
     event.preventDefault()
     newBlogFormRef.current.toggleExpanded()
     // console.log('create new blog', newBlog)

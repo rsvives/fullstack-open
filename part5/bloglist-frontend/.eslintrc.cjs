@@ -1,7 +1,8 @@
 module.exports = {
   env: {
     browser: true,
-    es2021: true
+    es2021: true,
+    'jest/globals': true
   },
   extends: [
     'standard',
@@ -24,9 +25,8 @@ module.exports = {
     ecmaVersion: 'latest',
     sourceType: 'module'
   },
-  plugins: [
-    'react'
-  ],
+  plugins:
+    ['react-refresh', 'jest'],
   rules: {
     'react/prop-types': 'warn',
     'react/react-in-jsx-scope': 'off'

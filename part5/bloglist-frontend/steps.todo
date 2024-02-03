@@ -18,11 +18,11 @@ PART 5:
         ☐ 5.12 - Define PropTypes @est(1h)
 
     Part 5c - testing: @today
-        ☐ Reading material @est(1h30m)
-        ☐ 5.13 - Test: only title and author displayed by default @est(30m)
-        ☐ 5.14 - Test: URL and likes supper when clicked @est(30m)
-        ☐ 5.15 - Test: like button clicked twice, handled twice @est(30m)
-        ☐ 5.16 - Test: new blog form @est(30m)
+        ✔ Reading material @est(1h30m) @done(24-02-03 15:43)
+        ✔ 5.13 - Test: only title and author displayed by default @est(30m) @started(24-02-02 18:35) @done(24-02-02 19:04) @lasted(29m50s)
+        ✔ 5.14 - Test: URL and likes supper when clicked @est(30m) @done(24-02-02 19:16)
+        ✔ 5.15 - Test: like button clicked twice, handled twice @est(30m) @done(24-02-02 19:53)
+        ✔ 5.16 - Test: new blog form @est(30m) @done(24-02-03 15:43)
 
     Part 5d - E2E testing:
         ☐ Reading material @est(1h30m)

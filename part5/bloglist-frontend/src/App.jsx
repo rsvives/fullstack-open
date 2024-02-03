@@ -62,7 +62,7 @@ const App = () => {
       addedBlog.user = { username: user.username, name: user.name }
       console.log('added blog', addedBlog)
       setBlogs([...blogs, addedBlog])
-      setNotification({ message: '✅ New blog added', status: 'info' })
+      setNotification({ message: '✅ New blog added', status: 'success' })
     } catch (error) {
       console.error('error creating new blog', error)
       setNotification({ message: `Error creating new blog, error: ${error}`, status: 'error' })
