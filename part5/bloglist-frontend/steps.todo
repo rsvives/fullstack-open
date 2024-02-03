@@ -14,7 +14,7 @@ PART 5:
             ✔ frontend @est(25m) @high @done(24-02-01 20:21)
 
         ✔ 5.10 - Display blogs: Sorting by number of likes @est(15m) @done(24-02-02 08:25)
-        ☐ 5.11 - Deleting blogs @est(20m)
+        ✔ 5.11 - Deleting blogs @est(20m) @done(24-02-02 17:47)
         ☐ 5.12 - Define PropTypes @est(1h)
 
     Part 5c - testing: @today

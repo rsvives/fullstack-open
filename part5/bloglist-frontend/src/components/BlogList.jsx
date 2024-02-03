@@ -2,7 +2,7 @@ import Blog from './Blog'
 import NewBlogForm from './NewBlogForm'
 // import blogService from '../services/blogs'
 
-const BlogList = ({ blogs, onCreateNew, onUpdate }) => {
+const BlogList = ({ blogs, onCreateNew, onUpdate, onDelete }) => {
   const blogList = {
     maxWidth: 800,
     margin: 'auto'
@@ -20,7 +20,7 @@ const BlogList = ({ blogs, onCreateNew, onUpdate }) => {
     <div className="blogList" style={blogList}>
     <h2>Blogs</h2>
       {blogs.map(blog =>
-        <Blog key={blog.id} blog={blog} onUpdate={onUpdate}/>
+        <Blog key={blog.id} blog={blog} onUpdate={onUpdate} onDelete={onDelete}/>
       )}
     </div>
   </>
