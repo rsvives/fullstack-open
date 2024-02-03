@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types'
 import Blog from './Blog'
 import NewBlogForm from './NewBlogForm'
 // import blogService from '../services/blogs'
@@ -7,11 +8,6 @@ const BlogList = ({ blogs, onCreateNew, onUpdate, onDelete, loggedUser }) => {
     maxWidth: 800,
     margin: 'auto'
   }
-
-  // const increaseLikes = async (blog) => {
-  //   const updatedBlog = await blogService.updateBlog({ ...blog, likes: likes + 1 })
-  //   blogs.find(blog.id) = updatedBlog.likes
-  // }
 
   return (
     <>
@@ -25,6 +21,14 @@ const BlogList = ({ blogs, onCreateNew, onUpdate, onDelete, loggedUser }) => {
     </div>
   </>
   )
+}
+BlogList.propTypes = {
+  blogs: PropTypes.array,
+  onCreateNew: PropTypes.func.isRequired,
+  onUpdate: PropTypes.func.isRequired,
+  onDelete: PropTypes.func.isRequired,
+  loggedUser: PropTypes.object.isRequired
+
 }
 
 export default BlogList
