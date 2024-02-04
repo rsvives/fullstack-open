@@ -1,6 +1,6 @@
 PART 5:
     Part 5b- prop children and proptypes: @today
-        ☐ Reading material @est(1h)
+        ✔ Reading material @est(1h) @done(24-02-04 11:16)
         ✔ 5.5 - Toggle new Blog form @est(45m) @started(24-02-01 15:15) @done(24-02-01 16:33) @lasted(1h18m37s)
         ✔ 5.6 - Refactor newBlogForm in new component @est(30m) @started(24-02-01 16:33) @done(24-02-01 18:16) @lasted(1h43m44s)
 
@@ -15,7 +15,7 @@ PART 5:
 
         ✔ 5.10 - Display blogs: Sorting by number of likes @est(15m) @done(24-02-02 08:25)
         ✔ 5.11 - Deleting blogs @est(20m) @done(24-02-02 17:47)
-        ☐ 5.12 - Define PropTypes @est(1h)
+        ✔ 5.12 - Define PropTypes @est(1h) @done(24-02-04 11:15)
 
     Part 5c - testing: @today
         ✔ Reading material @est(1h30m) @done(24-02-03 15:43)
@@ -25,7 +25,7 @@ PART 5:
         ✔ 5.16 - Test: new blog form @est(30m) @done(24-02-03 15:43)
 
     Part 5d - E2E testing:
-        ☐ Reading material @est(1h30m)
+        ✔ Reading material @est(1h30m) @done(24-02-04 11:15)
         ✔ 5.17 - configure cypress: login by default @est(15m) @done(24-02-03 16:28)
         ✔ 5.18 - login successfully and unsuccessfully attempts @est(30m) @started(24-02-03 16:28) @done(24-02-03 17:08) @lasted(40m28s)
         ✔ 5.19 - logged in users can create blogs @est(30m) @done(24-02-03 17:08)
