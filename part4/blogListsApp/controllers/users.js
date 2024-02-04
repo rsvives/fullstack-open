@@ -18,5 +18,14 @@ usersRouter.post('/', async (req, res) => {
   const savedUser = await newUser.save()
   res.status(201).json(savedUser)
 })
+usersRouter.post('/testing/reset', async (req, res) => {
+  if (process.env.NODE_ENV !== 'test') return null
+  const { name, username, password } = req.body
+  const passwordHash = await bcrypt.hash(password, config.SALT_ROUNDS)
+  await User.deleteMany({})
+  const newUser = new User({ name, username, passwordHash })
+  const savedUser = await newUser.save()
+  res.status(201).json({ message: 'db reseted', savedUser })
+})
 
 module.exports = usersRouter

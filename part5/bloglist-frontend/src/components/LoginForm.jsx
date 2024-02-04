@@ -37,7 +37,7 @@ const LoginForm = ({ submitAction }) => {
         <label htmlFor="password">password:</label>
         <input type="password" id="password"value={password} onChange={handlePasswordChange}/>
 
-        <button type="submit">Login</button>
+        <button id='loginButton' type="submit">Login</button>
     </form>
   )
 }

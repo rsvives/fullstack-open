@@ -27,7 +27,7 @@ module.exports = {
     sourceType: 'module'
   },
   plugins:
-    ['react-refresh', 'jest'],
+    ['react-refresh', 'jest', 'cypress'],
   rules: {
     'react/prop-types': 'warn',
     'react/react-in-jsx-scope': 'off'
