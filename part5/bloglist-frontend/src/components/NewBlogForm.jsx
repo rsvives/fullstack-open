@@ -41,7 +41,7 @@ const NewBlogForm = ({ createNewBlog }) => {
     <div>
     <Togglable ref={newBlogFormRef} style={togglable} buttonLabel='New Blog' >
     <h2 > Create New</h2>
-    <form style={formStyle} onSubmit={addNewBlog}>
+    <form id='newBlogForm' style={formStyle} onSubmit={addNewBlog}>
         <label htmlFor="blogTitle">Title:</label>
         <input type="text" id='blogTitle' value={newBlog.title} name="title" onChange={handleNewBlogChange} required/>
 

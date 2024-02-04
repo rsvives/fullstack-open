@@ -52,4 +52,20 @@ blogsRouter.put('/:id', async (request, response) => {
   response.status(200).json(updatedBlog)
 })
 
+// // testing reset db
+// blogsRouter.post('/', userExtractor, async (request, response, next) => {
+
+//   if (!blog.title || !blog.url) { return response.status(400).end() }
+
+//   const decodedToken = request.decodedToken
+//   const user = await User.findById(decodedToken.id)
+//   blog.user = user.id
+//   const savedBlog = await blog.save()
+
+//   user.blogList = user.blogList.concat(savedBlog.id)
+//   await user.save()
+
+//   response.status(201).json(savedBlog)
+// })
+
 module.exports = blogsRouter

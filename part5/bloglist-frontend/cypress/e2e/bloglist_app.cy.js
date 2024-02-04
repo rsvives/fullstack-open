@@ -41,4 +41,28 @@ describe('Blog app', function () {
       cy.get('.toast').should('have.css', 'background-color', 'rgb(255, 173, 173)') // cypress doesn't understand hex
     })
   })
+  describe('When logged in', function () {
+    const newBlog = {
+      title: 'New blog',
+      author: 'myself',
+      url: 'https://myblog.me'
+    }
+    beforeEach(function () {
+      // cy.request('POST', 'http://localhost:3003/api/blogs/testing/reset')
+
+      cy.get('#username').type(user.username)
+      cy.get('#password').type(user.password)
+      cy.get('#loginButton').click()
+    })
+
+    it('A blog can be created', function () {
+      cy.contains('New Blog').click()
+      cy.get('#blogTitle').type(newBlog.title)
+      cy.get('#blogAuthor').type(newBlog.author)
+      cy.get('#blogUrl').type(newBlog.url)
+      cy.get('#newBlogForm').submit()
+
+      cy.get('.blogList > *').last().contains(`${newBlog.title} | ${newBlog.author}`)
+    })
+  })
 })
