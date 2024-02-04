@@ -6,7 +6,7 @@
     background-color: #dee5ec;
     font-weight: 600;
     position: absolute;
-    bottom: 24px;
+    top: 24px;
     box-shadow: 0 0 12px rgba(0, 0, 0, 0.2);
     border-radius: 4px;
 }

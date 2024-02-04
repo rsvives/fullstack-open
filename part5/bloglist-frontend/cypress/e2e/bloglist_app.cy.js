@@ -1,13 +1,19 @@
+import { initialBlogs } from '../../../../part4/blogListsApp/tests/test_helper'
 describe('Blog app', function () {
   const user = {
     username: 'testingUser',
     name: 'Mr tester',
     password: 'TestingE2E'
   }
+  const sortedBlogs = initialBlogs.sort((a, b) => b.likes - a.likes)
+
+  before(function () {
+    cy.request('POST', 'http://localhost:3003/api/testing/reset', user)
+  })
 
   beforeEach(function () {
-    cy.request('POST', 'http://localhost:3003/api/users/testing/reset', user)
-    // create here a user to backend
+    // reset db
+    cy.request('POST', 'http://localhost:3003/api/testing/reset', user)
     cy.visit('http://localhost:5173')
   })
 
@@ -48,7 +54,7 @@ describe('Blog app', function () {
       url: 'https://myblog.me'
     }
     beforeEach(function () {
-      // cy.request('POST', 'http://localhost:3003/api/blogs/testing/reset')
+      // await cy.request('POST', 'http://localhost:3003/api/testing/reset', user)
 
       cy.get('#username').type(user.username)
       cy.get('#password').type(user.password)
@@ -62,7 +68,71 @@ describe('Blog app', function () {
       cy.get('#blogUrl').type(newBlog.url)
       cy.get('#newBlogForm').submit()
 
-      cy.get('.blogList > *').last().contains(`${newBlog.title} | ${newBlog.author}`)
+      cy.get('.blogList > div').last().contains(`${newBlog.title} | ${newBlog.author}`)
+    })
+    it('A blog can be liked', function () {
+      const firstElement = cy.get('.blogList > div').first().contains('show')
+      firstElement.click()
+
+      const likeButton = cy.get('.likeButton')
+      cy.contains('12 likes')
+      likeButton.click()
+      cy.contains('13 likes')
+    })
+    it('A blog can be deleted by its owner', function () {
+      cy.contains('New Blog').click()
+      cy.get('#blogTitle').type(newBlog.title)
+      cy.get('#blogAuthor').type(newBlog.author)
+      cy.get('#blogUrl').type(newBlog.url)
+
+      cy.intercept('POST', '/api/blogs').as('newBlog')
+      cy.get('#newBlogForm').submit()
+
+      cy.wait('@newBlog')
+
+      const addedBlog = cy.get('.blog').last()
+      addedBlog.contains('show').click()
+
+      cy.intercept('DELETE', '/api/blogs').as('deleteBlog')
+      cy.contains('delete').click()
+
+      // cy.wait('@deleteBlog')
+
+      cy.contains(`${newBlog.title} | ${newBlog.author}`).should('not.exist')
+    })
+    it('Delete button only shown in owned blogs', function () {
+      cy.contains('New Blog').click()
+      cy.get('#blogTitle').type(newBlog.title)
+      cy.get('#blogAuthor').type(newBlog.author)
+      cy.get('#blogUrl').type(newBlog.url)
+      // cy.intercept('POST', '/api/blogs').as('newBlog')
+      cy.get('#newBlogForm').submit()
+
+      // cy.wait('@newBlog')
+
+      // const addedBlog = cy.get('.blog').last()
+      cy.contains(`${newBlog.title} | ${newBlog.author}`)
+      cy.get('.blog').last().as('lastBlog')
+      cy.get('@lastBlog').contains('show').click()
+
+      cy.get('.blog').first().as('firstBlog')
+      cy.get('@firstBlog').contains('show').click()
+      cy.get('@firstBlog').contains('delete').should('not.exist')
+      cy.get('@lastBlog').contains('delete')
+    })
+    it('Blogs are sorted by likes', function () {
+      cy.get('.blog').as('blog')
+      cy.get('@blog').eq(0).as('firstBlog')
+      cy.get('@blog').eq(1).as('secondBlog')
+
+      cy.get('@firstBlog').should('contain', sortedBlogs[0].title)
+      cy.get('@secondBlog').contains('show').click()
+      cy.intercept('PUT', `/api/blogs/${sortedBlogs[1]._id}`).as('update')
+      cy.get('@secondBlog').get('.likeButton').click()
+      cy.wait('@update')
+      cy.get('@secondBlog').get('.likeButton').click()
+      cy.wait('@update')
+      cy.get('@firstBlog').should('contain', sortedBlogs[1].title)
     })
   })
 })

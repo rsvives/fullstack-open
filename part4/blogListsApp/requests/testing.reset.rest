@@ -1,0 +1,8 @@
+POST http://localhost:3003/api/testing/reset HTTP/1.1
+Content-Type: application/json
+# Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InVzZXIyIiwiaWQiOiI2NWI2ZDkxY2U1MDgyYjU1NmJmYzQ2YmYiLCJpYXQiOjE3MDY0ODE5NjcsImV4cCI6MTcwNjQ4NTU2N30.S3zdXI29O5ymgn21vyklvAh23SZQ9iStX3z0l5DJ_g1
+
+{
+    "username": "testingUser",
+    "password": "TestingE2E"
+}

@@ -37,7 +37,7 @@ const initialBlogs = [
     title: 'First class tests',
     author: 'Robert C. Martin',
     url: 'http://blog.cleancoder.com/uncle-bob/2017/05/05/TestDefinitions.htmll',
-    likes: 10,
+    likes: 11,
     __v: 0,
     user: '65b6f1340815d10bac68f88f'
   },

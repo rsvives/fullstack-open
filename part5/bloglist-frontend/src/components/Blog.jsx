@@ -50,14 +50,14 @@ const Blog = ({ blog, onUpdate, onDelete, loggedUser }) => {
   const expandedView = () => (
     <>
    { compressedView('hide')}
-    <p >{blog.likes} likes <button style={likeButton} onClick={increaseLikes}>like</button> </p>
+    <p className='blog-likes'>{blog.likes} likes <button className="likeButton" style={likeButton} onClick={increaseLikes}>like</button> </p>
     <a href={blog.url} target='_blank' rel="noreferrer">{blog.url}</a>
     <p>{blog.user.name} | <i>@{blog.user.username}</i> </p>
     {blog.user.username === loggedUser.username && <button onClick={handleDelete}>delete</button>}
     </>
   )
   return (
-    <div style={listStyle} >
+    <div className='blog' style={listStyle} >
        {content()}
     </div>
   )
