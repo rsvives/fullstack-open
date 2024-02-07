@@ -44,8 +44,15 @@ Source code:
 #### Error handling
 - Sentry [🔗](https://sentry.io/)
 
+#### State management
+
+- Redux [🔗](https://redux.js.org/)
+- Redux Toolkit [🔗](https://redux-toolkit.js.org/)
+- Zustand [🔗](https://github.com/pmndrs/zustand)
+- Recoil [🔗](https://recoiljs.org/)
+- MobX [🔗](https://mobx.js.org/README.html)
+
 #### Utils
 - [Regexr](https://regexr.com/): Regex explained
 - [Lodash](https://lodash.com/): Extra functionality for Javascript (a bit old)
-
-
+- [Deep-Freeze](https://www.npmjs.com/package/deep-freeze): can be used to ensure that the reducer has been correctly defined as an immutable function. 
