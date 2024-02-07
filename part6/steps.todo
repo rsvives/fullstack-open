@@ -2,19 +2,19 @@ PART 6:
     6.a - Flux architecture and Redux: 
         ☐ 6.1: Unicafe
         ☐ 6.2: Unicafe
-        ☐ 6.3: Anecdotes:
-        ☐ 6.4: Anecdotes:
-        ☐ 6.5: Anecdotes:
-        ☐ 6.6: Anecdotes:
-        ☐ 6.7: Anecdotes:
-        ☐ 6.8: Anecdotes:
+        ☐ 6.3: Anecdotes: votes into store redux @est(15m) 
+        ☐ 6.4: Anecdotes: new notes @est(15m) 
+        ☐ 6.5: Anecdotes: notes ordered by votes @est(10m) 
+        ☐ 6.6: Anecdotes: action function in /reducers/anecdoteReducer.js @est(5m) 
+        ☐ 6.7: Anecdotes: new anecdotes into AnecdoteForm @est(10m) 
+        ☐ 6.8: Anecdotes: AnecdoteList (and Anecdote) @est(10m) 
 
     6.b - Many reducers: 
-        ☐ 6.9: Anecdotes:
-        ☐ 6.10: Anecdotes:
-        ☐ 6.11: Anecdotes:
-        ☐ 6.12: Anecdotes:
-        ☐ 6.13: Anecdotes:
+        ☐ 6.9: Anecdotes: search filter  @est(15m) 
+        ☐ 6.10: Anecdotes: store.js with redux toolkit @est(15m) 
+        ☐ 6.11: Anecdotes: reducer and actions w/ createSlice @est(20m) 
+        ☐ 6.12: Anecdotes: Notification w/ Redux @est(15m) 
+        ☐ 6.13: Anecdotes: Notification when vote @est(15m) 
         
     6.c - Communicating with server: 
         ☐ 6.14: Anecdotes + backend:
