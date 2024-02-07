@@ -4,7 +4,7 @@ PART 6:
         ☐ 6.2: Unicafe
         ✔ 6.3: Anecdotes: votes into store redux @est(15m) @done(24-02-06 18:33)
         ✔ 6.4: Anecdotes: new notes @est(15m) @started(24-02-06 18:33) @done(24-02-06 18:50) @lasted(17m27s)
-        ☐ 6.5: Anecdotes: notes ordered by votes @est(10m) @started(24-02-06 18:50)
+        ✔ 6.5: Anecdotes: notes ordered by votes @est(10m) @started(24-02-06 18:50) @done(24-02-06 18:52) @lasted(2m30s)
         ☐ 6.6: Anecdotes: action function in /reducers/anecdoteReducer.js @est(5m) 
         ☐ 6.7: Anecdotes: new anecdotes into AnecdoteForm @est(10m) 
         ☐ 6.8: Anecdotes: AnecdoteList (and Anecdote) @est(10m) 
