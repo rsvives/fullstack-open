@@ -1,4 +1,4 @@
-PART 6:
+PART 6: [est]
     6.a - Flux architecture and Redux: 
         ☐ 6.1: Unicafe
         ☐ 6.2: Unicafe
@@ -10,7 +10,8 @@ PART 6:
         ✔ 6.8: Anecdotes: AnecdoteList (and Anecdote) @est(10m) @started(24-02-06 19:11) @done(24-02-06 19:28) @lasted(17m45s)
 
     6.b - Many reducers: 
-        ☐ 6.9: Anecdotes: search filter  @est(15m) 
+        ☐ read material @est(1h) @started(24-02-08 18:18)
+        ✔ 6.9: Anecdotes: search filter  @est(15m) @started(24-02-08 18:24) @done(24-02-08 18:45) @lasted(21m8s)
         ☐ 6.10: Anecdotes: store.js with redux toolkit @est(15m) 
         ☐ 6.11: Anecdotes: reducer and actions w/ createSlice @est(20m) 
         ☐ 6.12: Anecdotes: Notification w/ Redux @est(15m) 
