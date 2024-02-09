@@ -2,7 +2,7 @@ const filterReducer = (state = '', action) => {
   switch (action.type) {
     case 'UPDATE':{
       const search = action.payload
-      console.log('filter', search)
+      // console.log('filter', search)
       return search
     }
 
