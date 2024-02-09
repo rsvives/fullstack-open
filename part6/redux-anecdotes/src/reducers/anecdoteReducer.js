@@ -32,12 +32,12 @@ const anecdoteSlice = createSlice({
         content,
         votes: 0
       }
-      // console.log('add', newNote)
+
       state.push(newNote)
     },
     voteAnecdote (state, action) {
       const id = action.payload
-      // console.log('id', id)
+
       const anecdoteToUpdate = state.find(el => el.id === id)
       const updatedAnecdote = {
         ...anecdoteToUpdate,
@@ -48,6 +48,5 @@ const anecdoteSlice = createSlice({
   }
 })
 
-// export default anecdoteReducer
 export const { voteAnecdote, addAnecdote } = anecdoteSlice.actions
 export default anecdoteSlice.reducer
