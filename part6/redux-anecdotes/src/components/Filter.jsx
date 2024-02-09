@@ -5,7 +5,7 @@ const Filter = () => {
   const dispatch = useDispatch()
   const handleChange = (event) => {
     // input-field value is in variable event.target.value
-    console.log('event', event.target.value)
+    // console.log('event', event.target.value)
     dispatch(updateFilter(event.target.value))
   }
   const style = {
