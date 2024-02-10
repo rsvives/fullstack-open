@@ -1,4 +1,4 @@
-PART 6: [est]
+PART 6: 
     6.a - Flux architecture and Redux: 
         ☐ 6.1: Unicafe
         ☐ 6.2: Unicafe
@@ -10,22 +10,24 @@ PART 6: [est]
         ✔ 6.8: Anecdotes: AnecdoteList (and Anecdote) @est(10m) @started(24-02-06 19:11) @done(24-02-06 19:28) @lasted(17m45s)
 
     6.b - Many reducers: 
-        ☐ read material @est(1h) @started(24-02-08 18:18)
+        ✔ read material @est(1h) @started(24-02-08 18:18) @done(24-02-09 18:57) @lasted(1d39m43s)
         ✔ 6.9: Anecdotes: search filter  @est(15m) @started(24-02-08 18:24) @done(24-02-08 18:45) @lasted(21m8s)
         ✔ 6.10: Anecdotes: store.js with redux toolkit @est(15m) @done(24-02-08 20:52)
         ✔ 6.11: Anecdotes: reducer and actions w/ createSlice @est(20m) @done(24-02-08 20:52)
-        ☐ 6.12: Anecdotes: Notification w/ Redux @est(15m) @started(24-02-08 20:52)
-        ☐ 6.13: Anecdotes: Notification when vote @est(15m) 
+        ✔ 6.12: Anecdotes: Notification w/ Redux @est(15m) @started(24-02-08 20:52) @done(24-02-09 18:57) @lasted(22h5m40s)
+        ✔ 6.13: Anecdotes: Notification when vote @est(15m) @done(24-02-09 18:57)
         
     6.c - Communicating with server: 
-        ☐ 6.14: Anecdotes + backend:
-        ☐ 6.15: Anecdotes + backend:
-        ☐ 6.16: Anecdotes + backend:
-        ☐ 6.17: Anecdotes + backend:
-        ☐ 6.18: Anecdotes + backend:
-        ☐ 6.19: Anecdotes + backend:
+        ☐ read material @est(1h)
+        ✔ 6.14: Anecdotes + backend: fetch anecdotes from json-server @est(15m) @started(24-02-09 19:03) @done(24-02-09 19:31) @lasted(28m59s)
+        ☐ 6.15: Anecdotes + backend: store new anecdotes @est(10m)
+        ☐ 6.16: Anecdotes + backend: async store init @est(10m)
+        ☐ 6.17: Anecdotes + backend: async new anecdote action creator @est(15m)
+        ☐ 6.18: Anecdotes + backend: async vote saved in backend @est(20m)
+        ☐ 6.19: Anecdotes + backend: creation of notification in one action creator @est(15m)
         
     6.d - React Query, useReducer and the context: 
+        ☐ read material @est(1h)
         ☐ 6.20: Anecdotes w/ ReactQuery:
         ☐ 6.21: Anecdotes w/ ReactQuery:
         ☐ 6.22: Anecdotes w/ ReactQuery:
