@@ -48,7 +48,7 @@ Source code:
 
 - Redux [🔗](https://redux.js.org/)
 - Redux Toolkit [🔗](https://redux-toolkit.js.org/)
-- Redux Thunk: async [🔗](https://)
+- Redux Thunk: async [🔗](https://redux.js.org/usage/writing-logic-thunks)
 - Zustand [🔗](https://github.com/pmndrs/zustand)
 - Recoil [🔗](https://recoiljs.org/)
 - MobX [🔗](https://mobx.js.org/README.html)
