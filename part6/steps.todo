@@ -29,7 +29,7 @@ PART 6:
     6.d - React Query, useReducer and the context: 
         ☐ read material
         ✔ 6.20: Anecdotes w/ ReactQuery: fetching & error handling @est(30m) @started(24-02-10 12:15) @done(24-02-10 12:35) @lasted(20m20s)
-        ☐ 6.21: Anecdotes w/ ReactQuery: create new anecdotes @est(20m) @started(24-02-10 12:45)
-        ☐ 6.22: Anecdotes w/ ReactQuery: voting system @est(20m)
+        ✔ 6.21: Anecdotes w/ ReactQuery: create new anecdotes @est(20m) @started(24-02-10 12:45) @done(24-02-10 12:52) @lasted(7m1s)
+        ✔ 6.22: Anecdotes w/ ReactQuery: voting system @est(20m) @started(24-02-10 12:52) @done(24-02-10 13:10) @lasted(18m14s)
         ☐ 6.23: Anecdotes: Notification with userReducer() @est(20m)
         ☐ 6.24: Anecdotes: Error Handling for @est(10m)
