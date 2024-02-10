@@ -9,10 +9,11 @@ const Notification = () => {
     border: 'solid',
     padding: 10,
     borderWidth: 1,
-    position: 'absolute',
+    position: 'sticky',
     backgroundColor: 'lightgray',
     top: 12,
-    width: '100%'
+    width: 'inherit',
+    maxWidth: 'inherit'
   }
   return (notification !== '' &&
     <div style={style}>
