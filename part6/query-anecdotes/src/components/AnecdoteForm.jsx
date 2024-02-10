@@ -12,6 +12,10 @@ const AnecdoteForm = () => {
       const anecdotes = queryClient.getQueryData(['anecdotes'])
       queryClient.setQueryData(['anecdotes'], anecdotes.concat(newAnecdote))
       dispatch({ type: NOTIFICATION_ACTIONS.SET, payload: `✅ New anecdote added: ${newAnecdote.content}` })
+    },
+    onError: (error) => {
+      console.error(error)
+      dispatch({ type: NOTIFICATION_ACTIONS.SET, payload: `❌ Error ocurred: ${error.response.data.error}` })
     }
   })
 
