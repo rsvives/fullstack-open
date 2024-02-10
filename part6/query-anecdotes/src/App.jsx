@@ -8,8 +8,12 @@ const App = () => {
 
   const updateAnecdoteMutation = useMutation({
     mutationFn: anecdotesService.updateAnecdote,
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['anecdotes'] })
+    onSuccess: (updated) => {
+      // console.log('onSuccess', updated)
+      const anecdotes = queryClient.getQueryData(['anecdotes'])
+      const updatedAnecdotes = anecdotes.map(a => a.id === updated.id ? updated : a)
+      queryClient.setQueryData(['anecdotes'], updatedAnecdotes)
+      // queryClient.invalidateQueries({ queryKey: ['anecdotes'] })
     }
   })
   const handleVote = (anecdote) => {
