@@ -1,21 +1,19 @@
 import { createSlice } from '@reduxjs/toolkit'
-import anecdotes from '../services/anecdotes'
-
-const getId = async () => Math.max(await anecdotes.getAll().map(anecdote => anecdote.id)) + 1
+// import anecdotesService from '../services/anecdotes'
 
 const anecdoteSlice = createSlice({
   name: 'anecdotes',
   initialState: [],
   reducers: {
     addAnecdote (state, action) {
-      const content = action.payload
-      const newNote = {
-        id: getId(),
-        content,
-        votes: 0
-      }
+      // const content = action.payload
+      // const newNote = {
+      //   // id: anecdotesService.getId(),
+      //   content,
+      //   votes: 0
+      // }
 
-      state.push(newNote)
+      state.push(action.payload)
     },
     voteAnecdote (state, action) {
       const id = action.payload

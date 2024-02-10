@@ -20,7 +20,7 @@ PART 6:
     6.c - Communicating with server: 
         ☐ read material @est(1h)
         ✔ 6.14: Anecdotes + backend: fetch anecdotes from json-server @est(15m) @started(24-02-09 19:03) @done(24-02-09 19:31) @lasted(28m59s)
-        ☐ 6.15: Anecdotes + backend: store new anecdotes @est(10m)
+        ✔ 6.15: Anecdotes + backend: store new anecdotes @est(10m) @done(24-02-09 19:46)
         ☐ 6.16: Anecdotes + backend: async store init @est(10m)
         ☐ 6.17: Anecdotes + backend: async new anecdote action creator @est(15m)
         ☐ 6.18: Anecdotes + backend: async vote saved in backend @est(20m)
