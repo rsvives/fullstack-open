@@ -2,9 +2,9 @@ const Anecdote = ({ anecdote, handleVote }) => {
   const { content, votes } = anecdote
   return (
         <div className="anecdote">
-            <div>
+            <p>
                 {content}
-            </div>
+            </p>
             <div> has {votes} <button onClick={handleVote}>vote</button></div>
         </div>
   )

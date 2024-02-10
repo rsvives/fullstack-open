@@ -1,0 +1,38 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    margin: 12px;
+}
+
+main {
+    position: relative;
+    width: 100%;
+}
+
+.anecdotes-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.anecdote {
+    padding: 8px;
+    border-bottom: 1px solid lightgray;
+    display: flex;
+    gap: 4px;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.anecdote>p {
+    width: fit;
+}
+
+.anecdote>*:last-child {
+    width: fit-content;
+    white-space: pre;
+}

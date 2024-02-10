@@ -12,9 +12,9 @@ PART 6: [est]
     6.b - Many reducers: 
         ☐ read material @est(1h) @started(24-02-08 18:18)
         ✔ 6.9: Anecdotes: search filter  @est(15m) @started(24-02-08 18:24) @done(24-02-08 18:45) @lasted(21m8s)
-        ☐ 6.10: Anecdotes: store.js with redux toolkit @est(15m) 
-        ☐ 6.11: Anecdotes: reducer and actions w/ createSlice @est(20m) 
-        ☐ 6.12: Anecdotes: Notification w/ Redux @est(15m) 
+        ✔ 6.10: Anecdotes: store.js with redux toolkit @est(15m) @done(24-02-08 20:52)
+        ✔ 6.11: Anecdotes: reducer and actions w/ createSlice @est(20m) @done(24-02-08 20:52)
+        ☐ 6.12: Anecdotes: Notification w/ Redux @est(15m) @started(24-02-08 20:52)
         ☐ 6.13: Anecdotes: Notification when vote @est(15m) 
         
     6.c - Communicating with server: 
