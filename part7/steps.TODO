@@ -1,9 +1,9 @@
 PART 7:
     7a.- React Router:
-        ☐ read material @est(30m)
-        ☐ 7.1: Anecdotes routed w/create, list, and about pages and footer always visible @est(30m)
-        ☐ 7.2: Page for each single anecdote @est(20m)
-        ☐ 7.3: when create new->auto navigate to list and show notification @est(20)
+        ✔ read material @est(30m) @done(24-02-14 19:16)
+        ✔ 7.1: Anecdotes routed w/create, list, and about pages and footer always visible @est(30m) @done(24-02-14 19:16)
+        ✔ 7.2: Page for each single anecdote @est(20m) @done(24-02-14 19:16)
+        ✔ 7.3: when create new->auto navigate to list and show notification @est(20) @done(24-02-14 19:16)
     7b.- Custom Hooks: 
         ☐ read material @est(1h)
         ☐ 7.4:
