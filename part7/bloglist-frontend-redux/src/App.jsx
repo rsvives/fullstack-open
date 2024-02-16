@@ -9,17 +9,18 @@ import loginService from './services/login'
 import blogService from './services/blogs'
 import { sendNotification } from './reducers/notificationReducer'
 import { useDispatch } from 'react-redux'
+import { initializeBlogs } from './reducers/blogsReducer'
 
 const App = () => {
   const [blogs, setBlogs] = useState([])
   const [sortedBlogs, setSortedBlogs] = useState([])
   const [user, setUser] = useState(null)
-  const [notification, setNotification] = useState({ message: '', status: '' })
   const dispatch = useDispatch()
 
   useEffect(() => {
-    blogService.getAll().then((blogs) => setBlogs(blogs))
+    dispatch(initializeBlogs())
   }, [])
+
   const sortBlogs = () => {
     const sorted = [...blogs].sort((a, b) => b.likes - a.likes)
     console.log('sorted', sorted)
@@ -74,33 +75,34 @@ const App = () => {
     }
   }
 
-  const createNewBlog = async (blogObject) => {
-    blogService.setToken(user.token)
-    try {
-      // blogObject.user = user
-      const addedBlog = await blogService.createNew(blogObject)
-      addedBlog.user = { username: user.username, name: user.name }
-      console.log('added blog', addedBlog)
-      setBlogs([...blogs, addedBlog])
-      dispatch(
-        sendNotification(
-          { message: '✅ New blog added', status: 'success' },
-          3,
-        ),
-      )
-    } catch (error) {
-      console.error('error creating new blog', error)
-      dispatch(
-        sendNotification(
-          {
-            message: `❌ Error creating new blog, error: ${error}`,
-            status: 'error',
-          },
-          3,
-        ),
-      )
-    }
-  }
+  // const createNewBlog = async (blogObject) => {
+  //   blogService.setToken(user.token)
+  //   try {
+  //     blogObject.user = user
+  //     // const addedBlog = await blogService.createNew(blogObject)
+  //     // addedBlog.user = { username: user.username, name: user.name }
+  //     // console.log('added blog', addedBlog)
+  //     // setBlogs([...blogs, addedBlog])
+  //     dispatch(createNew(blogObject))
+  //     dispatch(
+  //       sendNotification(
+  //         { message: '✅ New blog added', status: 'success' },
+  //         3,
+  //       ),
+  //     )
+  //   } catch (error) {
+  //     console.error('error creating new blog', error)
+  //     dispatch(
+  //       sendNotification(
+  //         {
+  //           message: `❌ Error creating new blog, error: ${error}`,
+  //           status: 'error',
+  //         },
+  //         3,
+  //       ),
+  //     )
+  //   }
+  // }
 
   const updateBlog = async (blog) => {
     // console.log('updating likes', blog)
@@ -156,8 +158,8 @@ const App = () => {
   const loginForm = () => <LoginForm submitAction={handleLogin} />
   const blogList = () => (
     <BlogList
-      blogs={sortedBlogs}
-      onCreateNew={createNewBlog}
+      // blogs={sortedBlogs}
+      // onCreateNew={createNewBlog}
       onUpdate={updateBlog}
       onDelete={deleteBlog}
       loggedUser={user}
