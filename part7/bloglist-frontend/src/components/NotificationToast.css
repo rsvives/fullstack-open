@@ -1,0 +1,24 @@
+.toast {
+    padding: 12px;
+    width: 100%;
+    display: flex;
+    border: 2px solid;
+    background-color: #dee5ec;
+    font-weight: 600;
+    position: absolute;
+    top: 24px;
+    box-shadow: 0 0 12px rgba(0, 0, 0, 0.2);
+    border-radius: 4px;
+}
+
+.error {
+    color: red;
+    border-color: red;
+    background-color: #ffadad;
+}
+
+.success {
+    color: green;
+    border-color: green;
+    background-color: #9cc69c;
+}
