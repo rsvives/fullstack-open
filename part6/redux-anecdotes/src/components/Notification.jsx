@@ -1,25 +1,19 @@
-import { useSelector } from 'react-redux'
+import { useSelector } from "react-redux";
 
 const Notification = () => {
-  const notification = useSelector(({ notification }) => {
-    return notification
-  })
+  const notification = useSelector(({ notification }) => notification);
 
   const style = {
-    border: 'solid',
+    border: "solid",
     padding: 10,
     borderWidth: 1,
-    position: 'sticky',
-    backgroundColor: 'lightgray',
+    position: "sticky",
+    backgroundColor: "lightgray",
     top: 12,
-    width: 'inherit',
-    maxWidth: 'inherit'
-  }
-  return (notification !== '' &&
-    <div style={style}>
-      {notification}
-    </div>
-  )
-}
+    width: "inherit",
+    maxWidth: "inherit",
+  };
+  return notification !== "" && <div style={style}>{notification}</div>;
+};
 
-export default Notification
+export default Notification;

@@ -7,12 +7,15 @@ import NotificationToast from './components/NotificationToast'
 
 import loginService from './services/login'
 import blogService from './services/blogs'
+import { sendNotification } from './reducers/notificationReducer'
+import { useDispatch } from 'react-redux'
 
 const App = () => {
   const [blogs, setBlogs] = useState([])
   const [sortedBlogs, setSortedBlogs] = useState([])
   const [user, setUser] = useState(null)
   const [notification, setNotification] = useState({ message: '', status: '' })
+  const dispatch = useDispatch()
 
   useEffect(() => {
     blogService.getAll().then((blogs) => setBlogs(blogs))
@@ -41,25 +44,33 @@ const App = () => {
     try {
       const response = await loginService.login(username, password)
 
-      console.log(response)
+      // console.log(response)
       setUser(response)
       window.localStorage.setItem(
         'loggedBloglistUser',
         JSON.stringify(response),
       )
 
-      setNotification({
-        message: `👋 Welcome ${response.name}`,
-        status: 'success',
-      })
+      dispatch(
+        sendNotification(
+          {
+            message: `👋 Welcome ${response.name}`,
+            status: 'success',
+          },
+          3,
+        ),
+      )
     } catch (error) {
       console.error('credentials error', error)
-      setNotification({
-        message: `❌ Wrong username or password. Details: ${error}`,
-        status: 'error',
-      })
-    } finally {
-      setTimeout(() => setNotification({ message: '', status: '' }), 5000)
+      dispatch(
+        sendNotification(
+          {
+            message: `❌ Error ${error.response.status}: ${error.response.data.error}`,
+            status: 'error',
+          },
+          3,
+        ),
+      )
     }
   }
 
@@ -71,15 +82,23 @@ const App = () => {
       addedBlog.user = { username: user.username, name: user.name }
       console.log('added blog', addedBlog)
       setBlogs([...blogs, addedBlog])
-      setNotification({ message: '✅ New blog added', status: 'success' })
+      dispatch(
+        sendNotification(
+          { message: '✅ New blog added', status: 'success' },
+          3,
+        ),
+      )
     } catch (error) {
       console.error('error creating new blog', error)
-      setNotification({
-        message: `Error creating new blog, error: ${error}`,
-        status: 'error',
-      })
-    } finally {
-      setTimeout(() => setNotification({ message: '', status: '' }), 5000)
+      dispatch(
+        sendNotification(
+          {
+            message: `❌ Error creating new blog, error: ${error}`,
+            status: 'error',
+          },
+          3,
+        ),
+      )
     }
   }
 
@@ -92,12 +111,15 @@ const App = () => {
       setBlogs(newBlogs)
     } catch (error) {
       console.error('error creating new blog', error)
-      setNotification({
-        message: `Error updating blog, error: ${error}`,
-        status: 'error',
-      })
-    } finally {
-      setTimeout(() => setNotification({ message: '', status: '' }), 5000)
+      dispatch(
+        sendNotification(
+          {
+            message: `❌ Error updating blog, error: ${error}`,
+            status: 'error',
+          },
+          3,
+        ),
+      )
     }
   }
 
@@ -108,18 +130,26 @@ const App = () => {
       const filteredBlogs = blogs.filter((b) => b.id !== blog.id)
       console.log(filteredBlogs)
       setBlogs(filteredBlogs)
-      setNotification({
-        message: `🗑️ Blog deleted succesfully: ${blog.title} by ${blog.author}`,
-        status: 'success',
-      })
+      dispatch(
+        sendNotification(
+          {
+            message: `🗑️ Blog deleted succesfully: ${blog.title} by ${blog.author}`,
+            status: 'success',
+          },
+          3,
+        ),
+      )
     } catch (error) {
       console.error('error deleting blog', error)
-      setNotification({
-        message: `Error deleting blog, error: ${error}`,
-        status: 'error',
-      })
-    } finally {
-      setTimeout(() => setNotification({ message: '', status: '' }), 5000)
+      dispatch(
+        sendNotification(
+          {
+            message: `Error deleting blog, error: ${error}`,
+            status: 'error',
+          },
+          3,
+        ),
+      )
     }
   }
 
@@ -144,13 +174,7 @@ const App = () => {
 
   return (
     <div>
-      {/* {JSON.stringify()} */}
-      {notification.message !== '' && (
-        <NotificationToast
-          message={notification.message}
-          status={notification.status}
-        />
-      )}
+      <NotificationToast />
       <h1>
         Blog List App{' '}
         <span>

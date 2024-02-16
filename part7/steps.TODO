@@ -1,35 +1,33 @@
-PART 5:
-    Part 5b- prop children and proptypes: @today
-        ✔ Reading material @est(1h) @done(24-02-04 11:16)
-        ✔ 5.5 - Toggle new Blog form @est(45m) @started(24-02-01 15:15) @done(24-02-01 16:33) @lasted(1h18m37s)
-        ✔ 5.6 - Refactor newBlogForm in new component @est(30m) @started(24-02-01 16:33) @done(24-02-01 18:16) @lasted(1h43m44s)
-
-        ✔ 5.7 - Make blogs in blogList togglable: @done(24-02-01 18:17)
-            ✔ integrate with toggleComponent @est(20m) @done(24-02-01 18:16)
-            ✔ add CSS @est(10m) @done(24-02-01 18:17)
-
-        ✔ 5.8 - Showing user in new posts @est(30m) @done(24-02-01 19:05)
-        ✔ 5.9 - Update number of likes: @done(24-02-02 08:25)
-            ✔ backend @est(25m) @done(24-02-01 19:51)
-            ✔ frontend @est(25m) @high @done(24-02-01 20:21)
-
-        ✔ 5.10 - Display blogs: Sorting by number of likes @est(15m) @done(24-02-02 08:25)
-        ✔ 5.11 - Deleting blogs @est(20m) @done(24-02-02 17:47)
-        ✔ 5.12 - Define PropTypes @est(1h) @done(24-02-04 11:15)
-
-    Part 5c - testing: @today
-        ✔ Reading material @est(1h30m) @done(24-02-03 15:43)
-        ✔ 5.13 - Test: only title and author displayed by default @est(30m) @started(24-02-02 18:35) @done(24-02-02 19:04) @lasted(29m50s)
-        ✔ 5.14 - Test: URL and likes supper when clicked @est(30m) @done(24-02-02 19:16)
-        ✔ 5.15 - Test: like button clicked twice, handled twice @est(30m) @done(24-02-02 19:53)
-        ✔ 5.16 - Test: new blog form @est(30m) @done(24-02-03 15:43)
-
-    Part 5d - E2E testing:
-        ✔ Reading material @est(1h30m) @done(24-02-04 11:15)
-        ✔ 5.17 - configure cypress: login by default @est(15m) @done(24-02-03 16:28)
-        ✔ 5.18 - login successfully and unsuccessfully attempts @est(30m) @started(24-02-03 16:28) @done(24-02-03 17:08) @lasted(40m28s)
-        ✔ 5.19 - logged in users can create blogs @est(30m) @done(24-02-03 17:08)
-        ✔ 5.20 - users can like @est(10m) @done(24-02-04 08:23)
-        ✔ 5.21 - owners can delete @est(10m) @done(24-02-04 10:38)
-        ✔ 5.22 - only owners can see delete button @est(10m) @done(24-02-04 10:38)
-
+PART 7:
+    7a.- React Router:
+        ✔ read material @est(30m) @done(24-02-14 19:16)
+        ✔ 7.1: Anecdotes routed w/create, list, and about pages and footer always visible @est(30m) @done(24-02-14 19:16)
+        ✔ 7.2: Page for each single anecdote @est(20m) @done(24-02-14 19:16)
+        ✔ 7.3: when create new->auto navigate to list and show notification @est(20) @done(24-02-14 19:16)
+    7b.- Custom Hooks: 
+        ✔ read material @est(1h) @done(24-02-14 19:35)
+        ✔ 7.4: custom hook for fields of create new @done(24-02-14 19:47)
+        ✔ 7.5: reset functionality on useField() @done(24-02-14 19:47)
+        ✔ 7.6: @done(24-02-14 19:55)
+        ✔ 7.7: @done(24-02-15 19:15)
+        ✔ 7.8: @done(24-02-15 19:15)
+    7c.- Styles extension: 
+        ✔ read material @est(30m) @done(24-02-15 19:15)
+    7d.- Webpack: 
+        ✔ read material @est(30m) @done(24-02-15 19:15)
+    7e.- Class components & misc: 
+        ✔ read material @est(30m) @done(24-02-15 19:15)
+    7f.- Exercises: 
+        ✔ 7.9: prettier config @done(24-02-15 19:15)
+        ☐ 7.10: refactor notification with redux /reactQuery @est(30m)
+        ☐ 7.11: redux /reactQuery for getAll and createNew @est(1h)
+        ☐ 7.12: redux /reactQuery for like and delete @est(30m)
+        ☐ 7.13: redux /reactQuery for user @est(1h)
+        ☐ 7.14: router: users view: display all users info @est(30m)
+        ☐ 7.15: router: individual user view @est(20m)
+        ☐ 7.16: router: individual blog view @est(20m)
+        ☐ 7.17: router: navigation menu  @est(10m)
+        ☐ 7.18: display (annonimus) comments from the backend  @est(40m)
+        ☐ 7.19: functionality to create (annonimus) comments on blogs  @est(10m)
+        ☐ 7.20: Adding UI Library  @est(30m)
+        ☐ 7.21: 1 hour of styling app @est(30m)
