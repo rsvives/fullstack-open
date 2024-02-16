@@ -6,7 +6,7 @@ export const useResource = (baseUrl) => {
 
   // ...
   useEffect(() => {
-    getAll().then(res => {
+    getAll().then((res) => {
       setResources(res)
     })
   }, [])
@@ -21,10 +21,8 @@ export const useResource = (baseUrl) => {
   }
 
   const service = {
-    create
+    create,
   }
 
-  return [
-    resources, service
-  ]
+  return [resources, service]
 }
