@@ -17,25 +17,12 @@ import userReducer, {
 } from './reducers/userReducer'
 
 const App = () => {
-  // const [blogs, setBlogs] = useState([])
-  // const [sortedBlogs, setSortedBlogs] = useState([])
-  // const [user, setUser] = useState(null)
   const dispatch = useDispatch()
 
   useEffect(() => {
     dispatch(initializeBlogs())
   }, [])
   const user = useSelector(({ user }) => user)
-
-  // const sortBlogs = () => {
-  //   const sorted = [...blogs].sort((a, b) => b.likes - a.likes)
-  //   console.log('sorted', sorted)
-  //   setSortedBlogs(sorted)
-  // }
-
-  // useEffect(() => {
-  //   sortBlogs()
-  // }, [blogs])
 
   const getUserFromLocalStorage = () => {
     const loggedUserJSON = window.localStorage.getItem('loggedBloglistUser')
@@ -49,15 +36,7 @@ const App = () => {
   const handleLogin = async (username, password) => {
     console.log('login', username, password)
     try {
-      // const response = await loginService.login(username, password)
-
-      // console.log(response)
-      // setUser(response)
       dispatch(logginUser(username, password))
-      // window.localStorage.setItem(
-      //   'loggedBloglistUser',
-      //   JSON.stringify(response),
-      // )
 
       // dispatch(
       //   sendNotification(
