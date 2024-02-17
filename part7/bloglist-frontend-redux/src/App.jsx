@@ -8,18 +8,24 @@ import NotificationToast from './components/NotificationToast'
 import loginService from './services/login'
 import blogService from './services/blogs'
 import { sendNotification } from './reducers/notificationReducer'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { initializeBlogs } from './reducers/blogsReducer'
+import userReducer, {
+  logginUser,
+  loggoutUser,
+  setUser,
+} from './reducers/userReducer'
 
 const App = () => {
-  const [blogs, setBlogs] = useState([])
+  // const [blogs, setBlogs] = useState([])
   // const [sortedBlogs, setSortedBlogs] = useState([])
-  const [user, setUser] = useState(null)
+  // const [user, setUser] = useState(null)
   const dispatch = useDispatch()
 
   useEffect(() => {
     dispatch(initializeBlogs())
   }, [])
+  const user = useSelector(({ user }) => user)
 
   // const sortBlogs = () => {
   //   const sorted = [...blogs].sort((a, b) => b.likes - a.likes)
@@ -35,7 +41,7 @@ const App = () => {
     const loggedUserJSON = window.localStorage.getItem('loggedBloglistUser')
     if (loggedUserJSON) {
       const user = JSON.parse(loggedUserJSON)
-      setUser(user)
+      dispatch(setUser(user))
     }
   }
   useEffect(getUserFromLocalStorage, [])
@@ -43,24 +49,25 @@ const App = () => {
   const handleLogin = async (username, password) => {
     console.log('login', username, password)
     try {
-      const response = await loginService.login(username, password)
+      // const response = await loginService.login(username, password)
 
       // console.log(response)
-      setUser(response)
-      window.localStorage.setItem(
-        'loggedBloglistUser',
-        JSON.stringify(response),
-      )
+      // setUser(response)
+      dispatch(logginUser(username, password))
+      // window.localStorage.setItem(
+      //   'loggedBloglistUser',
+      //   JSON.stringify(response),
+      // )
 
-      dispatch(
-        sendNotification(
-          {
-            message: `👋 Welcome ${response.name}`,
-            status: 'success',
-          },
-          3,
-        ),
-      )
+      // dispatch(
+      //   sendNotification(
+      //     {
+      //       message: `👋 Welcome ${user.name}`,
+      //       status: 'success',
+      //     },
+      //     3,
+      //   ),
+      // )
     } catch (error) {
       console.error('credentials error', error)
       dispatch(
@@ -74,51 +81,13 @@ const App = () => {
       )
     }
   }
-  //  const deleteBlog = async (blog) => {
-  //    blogService.setToken(user.token)
-  //    try {
-  //      await blogService.deleteBlog(blog.id)
-  //      const filteredBlogs = blogs.filter((b) => b.id !== blog.id)
-  //      console.log(filteredBlogs)
-  //      setBlogs(filteredBlogs)
-  //      dispatch(
-  //        sendNotification(
-  //          {
-  //            message: `🗑️ Blog deleted succesfully: ${blog.title} by ${blog.author}`,
-  //            status: 'success',
-  //          },
-  //          3,
-  //        ),
-  //      )
-  //    } catch (error) {
-  //      console.error('error deleting blog', error)
-  //      dispatch(
-  //        sendNotification(
-  //          {
-  //            message: `Error deleting blog, error: ${error}`,
-  //            status: 'error',
-  //          },
-  //          3,
-  //        ),
-  //      )
-  //    }
-  //  }
 
   const loginForm = () => <LoginForm submitAction={handleLogin} />
-  const blogList = () => (
-    <BlogList
-      // blogs={sortedBlogs}
-      // onCreateNew={createNewBlog}
-      // onUpdate={updateBlog}
-      // onDelete={deleteBlog}
-      loggedUser={user}
-    />
-  )
+  const blogList = () => <BlogList loggedUser={user} />
 
   const logoutButton = () => {
     const handleLogout = () => {
-      window.localStorage.removeItem('loggedBloglistUser')
-      setUser(null)
+      dispatch(loggoutUser())
     }
     return <button onClick={handleLogout}>logout</button>
   }
