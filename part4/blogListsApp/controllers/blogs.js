@@ -5,13 +5,13 @@ const { userExtractor } = require('../utils/middleware')
 
 // get all
 blogsRouter.get('/', async (req, res) => {
-  const blogs = await Blog.find({}).populate('user', { username: 1, name: 1 }).sort({ likes: -1 })
+  const blogs = await Blog.find({}).populate('user', { username: 1, name: 1 }).populate('comments', { content: 1 }).sort({ likes: -1 })
   res.json(blogs)
 })
 // get by id
 blogsRouter.get('/:id', async (req, res) => {
   const id = req.params.id
-  const blog = await Blog.findById(id)
+  const blog = await Blog.findById(id).populate('comments', { content: 1 })
   res.json(blog)
 })
 
