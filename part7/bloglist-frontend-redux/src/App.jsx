@@ -1,5 +1,5 @@
 import './App.css'
-import { useState, useEffect } from 'react'
+import { useEffect } from 'react'
 
 import LoginForm from './components/LoginForm'
 import BlogList from './components/BlogList'
@@ -7,20 +7,21 @@ import NotificationToast from './components/NotificationToast'
 
 import { useDispatch, useSelector } from 'react-redux'
 import { initializeBlogs } from './reducers/blogsReducer'
-import userReducer, {
-  logginUser,
-  loggoutUser,
-  setUser,
-} from './reducers/userReducer'
+import { logginUser, setUser } from './reducers/loggedUserReducer'
+
+import { Route, Routes, useMatch } from 'react-router-dom'
+import NavMenu from './components/NavMenu'
+import UsersPage from './components/UsersPage'
+import { initializeUsers } from './reducers/usersReducer'
+import UserDetails from './components/UserDetails'
 
 const App = () => {
   const dispatch = useDispatch()
 
   useEffect(() => {
     dispatch(initializeBlogs())
+    dispatch(initializeUsers())
   }, [])
-
-  const user = useSelector(({ user }) => user)
 
   const getUserFromLocalStorage = () => {
     const loggedUserJSON = window.localStorage.getItem('loggedBloglistUser')
@@ -30,33 +31,36 @@ const App = () => {
     }
   }
   useEffect(getUserFromLocalStorage, [])
+  // const { loggedUser, users } = useSelector(
+  //   ({ loggedUser, users }) =>{ return (loggedUser,
+  //   users)}
+  // )
+  const loggedUser = useSelector(({ loggedUser }) => loggedUser)
+  const users = useSelector(({ users }) => users)
 
   const handleLogin = async (username, password) => {
     dispatch(logginUser(username, password))
   }
+  const match = useMatch('/users/:id')
+  const user = match ? users.find((u) => u.id === match.params.id) : null
 
+  console.log(user)
   const loginForm = () => <LoginForm submitAction={handleLogin} />
-  const blogList = () => <BlogList loggedUser={user} />
-
-  const logoutButton = () => {
-    const handleLogout = () => {
-      dispatch(loggoutUser())
-    }
-    return <button onClick={handleLogout}>logout</button>
-  }
+  const blogList = () => <BlogList loggedUser={loggedUser} />
 
   return (
-    <div>
+    <>
       <NotificationToast />
-      <h1>
-        Blog List App
-        <span>
-          {user && user.name} {user && logoutButton()}
-        </span>
-      </h1>
-
-      {user === null ? loginForm() : blogList()}
-    </div>
+      <NavMenu title="Blog List App" user={loggedUser} links={null} />
+      <Routes>
+        <Route path="/users/:id" element={<UserDetails user={user} />} />
+        <Route path="/users/" element={<UsersPage />} />
+        <Route
+          path="/"
+          element={loggedUser === null ? loginForm() : blogList()}
+        />
+      </Routes>
+    </>
   )
 }
 

@@ -2,8 +2,8 @@ import { createSlice } from '@reduxjs/toolkit'
 import login from '../services/login'
 import { sendNotification } from './notificationReducer'
 
-const userSlice = createSlice({
-  name: 'user',
+const loggedUserSlice = createSlice({
+  name: 'loggedUser',
   initialState: null,
   reducers: {
     setUser(state, action) {
@@ -12,7 +12,7 @@ const userSlice = createSlice({
   },
 })
 
-export const { setUser } = userSlice.actions
+export const { setUser } = loggedUserSlice.actions
 
 export const logginUser = (credentials) => {
   return async (dispatch) => {
@@ -49,4 +49,4 @@ export const loggoutUser = () => {
   }
 }
 
-export default userSlice.reducer
+export default loggedUserSlice.reducer
