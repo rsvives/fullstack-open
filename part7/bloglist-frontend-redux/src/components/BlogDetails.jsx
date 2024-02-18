@@ -3,6 +3,7 @@ import { destroyBlog, likeBlog } from '../reducers/blogsReducer'
 import { sendNotification } from '../reducers/notificationReducer'
 import blogsService from '../services/blogs'
 import { useNavigate } from 'react-router-dom'
+import CommentsSection from './CommentsSection'
 
 const BlogDetails = ({ blog, loggedUser }) => {
   const dispatch = useDispatch()
@@ -96,14 +97,7 @@ const BlogDetails = ({ blog, loggedUser }) => {
       {user.username === loggedUser.username && (
         <button onClick={handleDelete}>delete</button>
       )}
-      <h4>Comments:</h4>
-      <ul>
-        {blog.comments.length === 0 ? (
-          <p>no comments yet...</p>
-        ) : (
-          blog.comments.map((c) => <li key={c.id}>{c.content}</li>)
-        )}
-      </ul>
+      <CommentsSection blog={blog} />
     </>
   )
 }

@@ -19,6 +19,7 @@ commentsRouter.get('/blogs/:id/comments', async (req, res) => {
 commentsRouter.post('/blogs/:id/comments', async (req, res) => {
   const blogId = req.params.id
   const { content } = req.body
+  console.log(req.body)
   const newComment = new Comment({ content, blog: blogId })
   const blog = await Blog.findById(blogId)
   blog.comments = blog.comments.concat(newComment)
