@@ -70,7 +70,7 @@ const App = () => {
     <>
       <NotificationToast />
       <NavMenu title="Blog List App" user={loggedUser} links={links} />
-      <main className=" p-4 flex gap-4 minh-dvh relative">
+      <main className=" p-4 flex gap-4 minh-dvh relative grow">
         <Routes>
           <Route
             path="/blogs/:id"

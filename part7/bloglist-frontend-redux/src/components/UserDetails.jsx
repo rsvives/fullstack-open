@@ -6,7 +6,7 @@ const UserDetails = ({ user }) => {
   if (!user) return null
   const { name, username, blogList } = user
   return (
-    <div className="container card my-auto">
+    <div className="container card">
       <header className="flex gap-4 items-baseline mb-3">
         <h2 className="text-2xl">{name}</h2>
         <span className="text-sm text-gray-600">@{username}</span>
