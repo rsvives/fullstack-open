@@ -37,8 +37,8 @@ const BlogDetails = ({ blog, loggedUser }) => {
   const deleteBlog = async (blog) => {
     blogsService.setToken(loggedUser.token)
     try {
-      dispatch(destroyBlog(blog))
-      dispatch(
+      await dispatch(destroyBlog(blog))
+      await dispatch(
         sendNotification(
           {
             message: `🗑️ Blog deleted succesfully: ${title} by ${author}`,
@@ -50,10 +50,10 @@ const BlogDetails = ({ blog, loggedUser }) => {
       navigate('/')
     } catch (error) {
       console.error('error deleting blog', error)
-      dispatch(
+      await dispatch(
         sendNotification(
           {
-            message: `Error deleting blog, error: ${error}`,
+            message: `Error deleting blog, error: ${error.response.data.error}`,
             status: 'error'
           },
           3
