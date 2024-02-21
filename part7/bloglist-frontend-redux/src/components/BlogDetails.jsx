@@ -11,13 +11,6 @@ const BlogDetails = ({ blog, loggedUser }) => {
   console.log(blog)
   if (!blog) return null
 
-  const likeButtonStyle = {
-    borderRadius: 20,
-    fontSize: 10,
-    padding: '2px 8px',
-    cursor: 'pointer'
-  }
-
   const { title, author, likes, url, user } = blog
 
   const updateBlog = async (blog) => {
@@ -74,15 +67,15 @@ const BlogDetails = ({ blog, loggedUser }) => {
   }
 
   return (
-    <>
-      <h2>
+    <div className="h-dvh w-full">
+      <h2 className="text-2xl">Blog details</h2>
+      <h3 className="text-xl">
         {title} by {author}
-      </h2>
+      </h3>
       <p className="blog-likes">
         {likes} likes{' '}
         <button
-          className="likeButton"
-          style={likeButtonStyle}
+          className="btn btn-primary-outlined text-sm px-4 py-0 rounded-full"
           onClick={increaseLikes}
         >
           like
@@ -95,10 +88,12 @@ const BlogDetails = ({ blog, loggedUser }) => {
         {user.name} | <i>@{user.username}</i>{' '}
       </p>
       {user.username === loggedUser.username && (
-        <button onClick={handleDelete}>delete</button>
+        <button className="btn btn-primary-outlined" onClick={handleDelete}>
+          delete
+        </button>
       )}
       <CommentsSection blog={blog} />
-    </>
+    </div>
   )
 }
 export default BlogDetails

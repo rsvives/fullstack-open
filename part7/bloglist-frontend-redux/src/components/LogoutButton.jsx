@@ -7,6 +7,10 @@ const LogoutButton = ({ text = 'logout' }) => {
   const handleLogout = () => {
     dispatch(loggoutUser())
   }
-  return <button onClick={handleLogout}>{text}</button>
+  return (
+    <button className="btn btn-white-outlined" onClick={handleLogout}>
+      {text}
+    </button>
+  )
 }
 export default LogoutButton

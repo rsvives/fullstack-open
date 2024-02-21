@@ -1,43 +1,38 @@
-import { useState } from 'react'
+import { useDispatch } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
+import { logginUser } from '../reducers/loggedUserReducer'
+import { useField } from '../hooks'
 
-const LoginForm = ({ submitAction }) => {
-  const [username, setUsername] = useState('')
-  const [password, setPassword] = useState('')
+const LoginForm = (props) => {
+  const usernameField = useField('text')
+  const passwordField = useField('password')
 
-  const handleUsernameChange = (event) => {
-    setUsername(event.target.value)
-  }
-  const handlePasswordChange = (event) => {
-    setPassword(event.target.value)
-  }
+  const navigate = useNavigate()
+  const dispatch = useDispatch()
 
   const handleSubmit = async (event) => {
     event.preventDefault()
-    await submitAction({ username, password })
-    setUsername('')
-    setPassword('')
-  }
-  const formStyle = {
-    display: 'flex',
-    flexDirection: 'column',
-    gap: 8,
-    maxWidth: 400,
-    padding: 12,
-    border: 'solid',
-    borderWidth: 1,
-    borderRadius: 4,
-    margin: 'auto'
+    const credentials = {
+      username: usernameField.input.value,
+      password: passwordField.input.value
+    }
+    await dispatch(logginUser(credentials))
+    navigate('/')
+    usernameField.clear()
+    passwordField.clear()
   }
 
   return (
-    <form style={formStyle} onSubmit={handleSubmit}>
-        <label htmlFor="username">username:</label>
-        <input type="text" id="username" value={username} onChange={handleUsernameChange}/>
+    <form onSubmit={handleSubmit} className="card flex flex-col m-auto gap-4">
+      <label htmlFor="username">username:</label>
+      <input className="input" id="username" {...usernameField.input} />
 
-        <label htmlFor="password">password:</label>
-        <input type="password" id="password"value={password} onChange={handlePasswordChange}/>
+      <label htmlFor="password">password:</label>
+      <input id="password" className="input" {...passwordField.input} />
 
-        <button id='loginButton' type="submit">Login</button>
+      <button id="loginButton" className="btn btn-primary" type="submit">
+        Login
+      </button>
     </form>
   )
 }

@@ -46,7 +46,7 @@ export const likeBlog = (blog) => {
       likes: blog.likes + 1
     }
     console.log(newBlog)
-    const updatedBlog = await blogsService.updateBlog(newBlog)
+    await blogsService.updateBlog(newBlog)
     dispatch(updateBlogs(newBlog))
   }
 }

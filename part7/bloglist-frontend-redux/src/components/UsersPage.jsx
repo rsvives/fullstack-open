@@ -5,10 +5,10 @@ const UsersPage = ({ title = 'Users Page' }) => {
   const users = useSelector(({ users }) => users)
   console.log('users', users)
   return (
-    <>
-      <h2>{title}</h2>
-      <table cellSpacing={12} cellPadding={20}>
-        <thead>
+    <div className="flex flex-col mx-auto w-full">
+      <h2 className="text-2xl font-semibold">{title}</h2>
+      <table cellSpacing={0} cellPadding={12}>
+        <thead className="text-left">
           <tr>
             <th>User</th>
             <th>Blogs</th>
@@ -17,7 +17,10 @@ const UsersPage = ({ title = 'Users Page' }) => {
         <tbody>
           {users.map((u) => {
             return (
-              <tr key={u.username}>
+              <tr
+                key={u.username}
+                className="hover:bg-gray-200 divide-y divide-gray-100"
+              >
                 <td>
                   <Link to={`/users/${u.id}`}>{u.name}</Link>
                 </td>
@@ -27,7 +30,7 @@ const UsersPage = ({ title = 'Users Page' }) => {
           })}
         </tbody>
       </table>
-    </>
+    </div>
   )
 }
 export default UsersPage

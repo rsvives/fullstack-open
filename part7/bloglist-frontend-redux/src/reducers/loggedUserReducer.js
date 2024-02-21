@@ -8,8 +8,8 @@ const loggedUserSlice = createSlice({
   reducers: {
     setUser(state, action) {
       return action.payload
-    },
-  },
+    }
+  }
 })
 
 export const { setUser } = loggedUserSlice.actions
@@ -24,21 +24,22 @@ export const logginUser = (credentials) => {
         sendNotification(
           {
             message: `👋 Welcome ${user.name}`,
-            status: 'success',
+            status: 'success'
           },
-          3,
-        ),
+          3
+        )
       )
     } catch (e) {
       dispatch(
         sendNotification(
           {
             message: `❌ Error ${e.response.status}: ${e.response.data.error}`,
-            status: 'error',
+            status: 'error'
           },
-          3,
-        ),
+          3
+        )
       )
+      // throw new Error(e)
     }
   }
 }

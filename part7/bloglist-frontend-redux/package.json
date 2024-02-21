@@ -12,6 +12,7 @@
     "cypress:open": "cypress open"
   },
   "dependencies": {
+    "@phosphor-icons/react": "^2.0.15",
     "@reduxjs/toolkit": "^2.2.1",
     "axios": "^1.4.0",
     "prop-types": "^15.8.1",
@@ -30,6 +31,7 @@
     "@types/react": "^18.2.15",
     "@types/react-dom": "^18.2.7",
     "@vitejs/plugin-react": "^4.0.3",
+    "autoprefixer": "^10.4.17",
     "cypress": "^13.6.4",
     "eslint": "^8.56.0",
     "eslint-config-prettier": "^9.1.0",
@@ -45,6 +47,8 @@
     "eslint-plugin-react-refresh": "^0.4.5",
     "jest": "^29.7.0",
     "jest-environment-jsdom": "^29.7.0",
+    "postcss": "^8.4.35",
+    "tailwindcss": "^3.4.1",
     "vite": "^4.4.5"
   },
   "jest": {
