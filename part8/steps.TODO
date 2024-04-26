@@ -2,7 +2,7 @@ PART 8:
     8a.- GraphQL-server:
         ✔ read material @est(30m) @done(24-04-26 23:40)
         ✔ 8.1: Library - number of books and authors @est(15m) @done(24-04-26 23:44)
-        ☐ 8.2: Library - all books @est(10m)
+        ✔ 8.2: Library - all books @est(10m) @done(24-04-26 23:56)
         ☐ 8.3: Library - all authors @est(10m)
         ☐ 8.4: Library - books of an author @est(10m)
         ☐ 8.5: Library - books by genre @est(10m)
