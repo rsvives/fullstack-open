@@ -115,6 +115,13 @@ const App = () => {
               !loggedUser ? <LoginForm /> : <Navigate replace to={'/'} />
             }
           />
+          <Route
+            path="*"
+            element={
+              !loggedUser ? <LoginForm /> : <Navigate replace to={'/'} />
+            }
+          />
+
         </Routes>
       </main>
     </>
