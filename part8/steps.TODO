@@ -3,9 +3,9 @@ PART 8:
         ✔ read material @est(30m) @done(24-04-26 23:40)
         ✔ 8.1: Library - number of books and authors @est(15m) @done(24-04-26 23:44)
         ✔ 8.2: Library - all books @est(10m) @done(24-04-26 23:56)
-        ☐ 8.3: Library - all authors @est(10m)
-        ☐ 8.4: Library - books of an author @est(10m)
-        ☐ 8.5: Library - books by genre @est(10m)
+        ✔ 8.3: Library - all authors @est(10m) @done(24-04-27 00:29)
+        ✔ 8.4: Library - books of an author @est(10m) @done(24-04-27 00:29)
+        ✔ 8.5: Library - books by genre @est(10m) @done(24-04-27 00:29)
         ☐ 8.6: Library - adding a book @est(20m)
         ☐ 8.7: Library - updating the birth year of an author @est(20m)
 
