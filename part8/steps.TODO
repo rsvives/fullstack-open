@@ -6,8 +6,8 @@ PART 8:
         ✔ 8.3: Library - all authors @est(10m) @done(24-04-27 00:29)
         ✔ 8.4: Library - books of an author @est(10m) @done(24-04-27 00:29)
         ✔ 8.5: Library - books by genre @est(10m) @done(24-04-27 00:29)
-        ☐ 8.6: Library - adding a book @est(20m)
-        ☐ 8.7: Library - updating the birth year of an author @est(20m)
+        ✔ 8.6: Library - adding a book @est(20m) @done(24-04-27 01:08)
+        ✔ 8.7: Library - updating the birth year of an author @est(20m) @done(24-04-27 01:08)
 
     8b.- GraphQL + React:
         ☐ read material @est(1h)
