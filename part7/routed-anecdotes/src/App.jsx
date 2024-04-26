@@ -1,13 +1,13 @@
-import { useState } from "react";
-import "./App.css";
+import { useState } from 'react'
+import './App.css'
 
-import { Routes, Route, Link, useNavigate, useMatch } from "react-router-dom";
-import { useField } from "./hooks";
+import { Routes, Route, Link, useNavigate, useMatch } from 'react-router-dom'
+import { useField } from './hooks'
 
 const Menu = () => {
   const padding = {
-    paddingRight: 5,
-  };
+    paddingRight: 5
+  }
   return (
     <div>
       <Link to="/" style={padding}>
@@ -20,8 +20,8 @@ const Menu = () => {
         about
       </Link>
     </div>
-  );
-};
+  )
+}
 
 const AnecdoteList = ({ anecdotes }) => (
   <div>
@@ -34,9 +34,9 @@ const AnecdoteList = ({ anecdotes }) => (
       ))}
     </ul>
   </div>
-);
+)
 const Anecdote = ({ anecdote }) => {
-  console.log(anecdote);
+  console.log(anecdote)
   return (
     <div>
       <h3>
@@ -45,14 +45,14 @@ const Anecdote = ({ anecdote }) => {
 
       <p>votes: {anecdote.votes} </p>
       <p>
-        for more info:{" "}
+        for more info:{' '}
         <a href={anecdote.info} target="_blank" rel="noreferrer">
           {anecdote.info}
         </a>
       </p>
     </div>
-  );
-};
+  )
+}
 
 const About = () => (
   <div>
@@ -74,42 +74,42 @@ const About = () => (
       find the best and add more.
     </p>
   </div>
-);
+)
 
 const Footer = () => (
   <footer>
     Anecdote app for <a href="https://fullstackopen.com/">Full Stack Open</a>.
-    See{" "}
+    See{' '}
     <a href="https://github.com/fullstack-hy2020/routed-anecdotes/blob/master/src/App.js">
       https://github.com/fullstack-hy2020/routed-anecdotes/blob/master/src/App.js
-    </a>{" "}
+    </a>{' '}
     for the source code.
   </footer>
-);
+)
 
 const CreateNew = (props) => {
-  const navigate = useNavigate();
+  const navigate = useNavigate()
 
-  const content = useField("text");
-  const author = useField("text");
-  const info = useField("text");
+  const content = useField('text')
+  const author = useField('text')
+  const info = useField('text')
 
   const handleSubmit = (e) => {
-    e.preventDefault();
+    e.preventDefault()
     props.addNew({
       content: content.input.value,
       author: author.input.value,
       info: info.input.value,
-      votes: 0,
-    });
-    navigate("/");
-  };
+      votes: 0
+    })
+    navigate('/')
+  }
   const resetFields = (e) => {
-    e.preventDefault();
-    content.reset();
-    author.reset();
-    info.reset();
-  };
+    e.preventDefault()
+    content.reset()
+    author.reset()
+    info.reset()
+  }
 
   return (
     <div>
@@ -131,52 +131,52 @@ const CreateNew = (props) => {
         <button onClick={resetFields}>reset</button>
       </form>
     </div>
-  );
-};
+  )
+}
 
 const App = () => {
   const [anecdotes, setAnecdotes] = useState([
     {
-      content: "If it hurts, do it more often",
-      author: "Jez Humble",
-      info: "https://martinfowler.com/bliki/FrequencyReducesDifficulty.html",
+      content: 'If it hurts, do it more often',
+      author: 'Jez Humble',
+      info: 'https://martinfowler.com/bliki/FrequencyReducesDifficulty.html',
       votes: 0,
-      id: 1,
+      id: 1
     },
     {
-      content: "Premature optimization is the root of all evil",
-      author: "Donald Knuth",
-      info: "http://wiki.c2.com/?PrematureOptimization",
+      content: 'Premature optimization is the root of all evil',
+      author: 'Donald Knuth',
+      info: 'http://wiki.c2.com/?PrematureOptimization',
       votes: 0,
-      id: 2,
-    },
-  ]);
+      id: 2
+    }
+  ])
 
-  const [notification, setNotification] = useState("");
+  const [notification, setNotification] = useState('')
 
   const addNew = (anecdote) => {
-    anecdote.id = Math.round(Math.random() * 10000);
-    setAnecdotes(anecdotes.concat(anecdote));
-    setNotification(`✅ Anecdote added: ${anecdote.content}`);
-    setTimeout(() => setNotification(""), 5000);
-  };
+    anecdote.id = Math.round(Math.random() * 10000)
+    setAnecdotes(anecdotes.concat(anecdote))
+    setNotification(`✅ Anecdote added: ${anecdote.content}`)
+    setTimeout(() => setNotification(''), 5000)
+  }
 
-  const anecdoteById = (id) => anecdotes.find((a) => a.id === id);
+  const anecdoteById = (id) => anecdotes.find((a) => a.id === id)
 
   const vote = (id) => {
-    const anecdote = anecdoteById(id);
+    const anecdote = anecdoteById(id)
 
     const voted = {
       ...anecdote,
-      votes: anecdote.votes + 1,
-    };
+      votes: anecdote.votes + 1
+    }
 
-    setAnecdotes(anecdotes.map((a) => (a.id === id ? voted : a)));
-  };
-  const match = useMatch("/anecdotes/:id");
+    setAnecdotes(anecdotes.map((a) => (a.id === id ? voted : a)))
+  }
+  const match = useMatch('/anecdotes/:id')
   const anecdote = match
     ? anecdotes.find((anecdote) => anecdote.id === Number(match.params.id))
-    : null;
+    : null
 
   return (
     <>
@@ -194,7 +194,7 @@ const App = () => {
       </Routes>
       <Footer />
     </>
-  );
-};
+  )
+}
 
-export default App;
+export default App
