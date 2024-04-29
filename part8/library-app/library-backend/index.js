@@ -82,29 +82,13 @@ const resolvers = {
     addBook:async (root,args)=>{
         const author = await Author.findOne({name:args.author})?? await new Author({name:args.author}).save()
         const book = {...args, author:author._id}
-        console.log(author, book);
         const savedBook = await new Book({...book}).save()
-        console.log(savedBook);
       
         return savedBook
     },
-		editAuthor: (root, args)=>{
-			const author = authors.find(el=>el.name===args.name)
-			console.log(author);
-			if(!author) return null
-			
-			let updatedAuthor = null
-			authors = authors.map(el => {
-				if (el.name ===author.name){
-					updatedAuthor ={
-						...el, 
-						born:args.setBornTo
-					}
-					return updatedAuthor
-				}else{
-					return el
-				}
-			})
+		editAuthor: async (root, args)=>{
+			const updatedAuthor = await Author.findOneAndUpdate({name:args.name},{born:args.setBornTo})
+			console.log(updatedAuthor)
 			return updatedAuthor
 		}
 	}
