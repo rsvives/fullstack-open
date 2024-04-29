@@ -11,8 +11,8 @@ PART 8:
 
     8b.- GraphQL + React:
         ☐ read material @est(1h)
-        ☐ 8.8: authors view @est(20m)
-        ☐ 8.9: books view @est(20m)
+        ✔ 8.8: authors view @est(20m) @done(24-04-28 14:22)
+        ✔ 8.9: books view @est(20m) @done(24-04-28 14:22)
         ☐ 8.10: adding a book @est(15m)
         ☐ 8.11: authors birth year @est(20m)
         ☐ 8.12: authors birth year advanced @est(20m)
