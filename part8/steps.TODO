@@ -22,7 +22,7 @@ PART 8:
         ✔ 8.13: saving data in db @est(15m) @done(24-05-14 10:42)
         ✔ 8.14: complete all queries @est(15m) @done(24-05-14 10:49)
         ✔ 8.15:  validation errors @est(15m) @started(24-05-14 11:00) @done(24-05-14 11:43) @lasted(43m52s)
-        ☐ 8.16:  user logging @est(30m)
+        ✔ 8.16:  user logging @est(30m) @started(24-05-14 11:48) @done(24-05-14 13:36) @lasted(1h48m24s)
     
     8d.- Login & cache:
         ☐ read material @est(1h)
