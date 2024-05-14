@@ -8,6 +8,7 @@ const authorSchema = new mongoose.Schema({
     },
     born:{
         type: Number,
+        max:new Date().getFullYear()
     },
     bookCount:{
         type:Number,

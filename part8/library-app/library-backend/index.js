@@ -5,6 +5,7 @@ require('dotenv').config()
 const Author = require('./models/Author')
 const Book = require('./models/Book')
 const mongoose = require('mongoose')
+const { GraphQLError } = require('graphql')
 
 const MONGODB_URI = process.env.MONGODB_URI
 
@@ -80,16 +81,54 @@ const resolvers = {
 	},
 	Mutation :{
     addBook:async (root,args)=>{
-        const author = await Author.findOne({name:args.author})?? await new Author({name:args.author}).save()
+      // try{
+        const author = await Author.findOne({name:args.author})?? await new Author({name:args.author})
+        try{
+          await author.save()
+        }
+        catch(error){
+          throw new GraphQLError('Error adding book: incorrect author',{
+            extensions:{
+              code: 'BAD_USER_INPUT',
+              invalidArgs: {author},
+              error
+            }
+          })
+        }
+
         const book = {...args, author:author._id}
-        const savedBook = await new Book({...book}).save()
-      
-        return savedBook
+        try{
+          const savedBook = await (await new Book({...book}).save()).populate('author')
+          console.log(savedBook);
+          return savedBook
+        }catch(error){
+            throw new GraphQLError('Error adding book: saving error',{
+              extensions:{
+                code: 'sadfasdf',
+                invalidArgs: {title: book.title},
+                error
+              }
+            })
+          }
+        
+        
     },
 		editAuthor: async (root, args)=>{
-			const updatedAuthor = await Author.findOneAndUpdate({name:args.name},{born:args.setBornTo})
-			console.log(updatedAuthor)
-			return updatedAuthor
+      try{
+        const updatedAuthor = await Author.findOneAndUpdate({name:args.name},{born:args.setBornTo},{new:true, runValidators:true})
+        return updatedAuthor
+      }
+        catch(error){
+          throw new GraphQLError('Error updating author: incorrect year of birth',{
+            extensions:{
+              code: 'BAD_USER_INPUT',
+              invalidArgs: args.setBornTo,
+              error
+            }
+          })
+        }
+        
+			
 		}
 	}
 }
