@@ -27,11 +27,11 @@ PART 8:
     8d.- Login & cache:
         ☐ read material @est(1h)
         ☐ 8.17: listing books @est(10m)
-        ☐ 8.18:  login @est(30m)
-        ☐ 8.19:  books by genre 1 @est(10m)
-        ☐ 8.20:  books by genre 2: loggedin user fav genre @est(20m)
-        ☐ 8.21:  🌶️ filter prev 2 by GraphQL not just react @est(1h)
-        ☐ 8.22:  🌶️ up-to-date cache and book recommendation @est(1h)
+        ☐ 8.18: login @est(30m)
+        ☐ 8.19: books by genre 1 @est(10m)
+        ☐ 8.20: books by genre 2: loggedin user fav genre @est(20m)
+        ☐ 8.21: 🌶️ filter prev 2 by GraphQL not just react @est(1h)
+        ☐ 8.22: 🌶️ up-to-date cache and book recommendation @est(1h)
     
     8e.- Fragments & subs:
         ☐ read material @est(1h)
