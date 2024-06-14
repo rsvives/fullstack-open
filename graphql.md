@@ -164,3 +164,33 @@ const App = () => {
 export default App
 ```
 </div>
+
+## Fragment and subscriptions
+
+### Fragments
+```js
+//client side
+const PERSON_DETAILS = gql`
+  fragment PersonDetails on Person {
+    id
+    name
+    phone 
+    address {
+      street 
+      city
+    }
+  }
+`
+export const FIND_PERSON = gql`
+  query findPersonByName($nameToSearch: String!) {
+    findPerson(name: $nameToSearch) {
+      ...PersonDetails
+    }
+  }
+  ${PERSON_DETAILS}
+
+`
+
+```
+
+### Subscriptions
